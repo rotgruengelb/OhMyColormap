@@ -9,30 +9,37 @@ from timing import time_this
 BUILD_PROCESS_DIR = "../build/process"
 
 @time_this
-def prepare_minecraft_resources(mc_versions: list) -> bool:
-    if not download_minecraft_client_jars(mc_versions):
+def prepare_resources_references(mc_versions: list) -> bool:
+    if not download_client_jars(mc_versions):
         return False
-    unzip_minecraft_client_jars(mc_versions)
+    unzip_client_jars(mc_versions)
     clean_process_version_directories(mc_versions)
     return True
 
 @time_this
-def download_minecraft_client_jars(mc_versions: list) -> bool:
+def download_client_jars(mc_versions: list) -> bool:
+    manifest = get_manifest()
+    if len(manifest) == 0:
+        return False
     with ThreadPoolExecutor() as executor:
-        futures = [executor.submit(download_minecraft_client_jar, mc_version) for mc_version in mc_versions]
+        futures = [executor.submit(download_client_jar, mc_version, manifest) for mc_version in mc_versions]
         for future in as_completed(futures):
             if not future.result():
                 return False
     return True
 
-def download_minecraft_client_jar(mc_version: str) -> bool:
+@time_this
+def get_manifest() -> dict:
     manifest_url = "https://launchermeta.mojang.com/mc/game/version_manifest_v2.json"
     manifest_response = requests.get(manifest_url)
     if manifest_response.status_code != 200:
-        logging.error(f"Failed to fetch manifest for {mc_version}")
-        return False
+        logging.error("Failed to fetch manifest")
+        return {}
+    logging.info("Fetched manifest")
+    return manifest_response.json()
 
-    version_field = next((v for v in manifest_response.json()["versions"] if v["id"] == mc_version), None)
+def download_client_jar(mc_version: str, manifest: dict) -> bool:
+    version_field = next((v for v in manifest["versions"] if v["id"] == mc_version), None)
     if not version_field:
         logging.error(f"Version {mc_version} not found in manifest")
         return False
@@ -44,7 +51,7 @@ def download_minecraft_client_jar(mc_version: str) -> bool:
         return False
 
     client_url = version_response.json()["downloads"]["client"]["url"]
-    download_path = os.path.join(BUILD_PROCESS_DIR, mc_version, "mc_client.jar")
+    download_path = os.path.join(BUILD_PROCESS_DIR, mc_version, "client.jar")
     os.makedirs(os.path.dirname(download_path), exist_ok=True)
     client_response = requests.get(client_url)
     if client_response.status_code != 200:
@@ -57,15 +64,15 @@ def download_minecraft_client_jar(mc_version: str) -> bool:
     return True
 
 @time_this
-def unzip_minecraft_client_jars(mc_versions: list):
+def unzip_client_jars(mc_versions: list):
     with ThreadPoolExecutor() as executor:
-        futures = [executor.submit(unzip_single_jar, mc_version) for mc_version in mc_versions]
+        futures = [executor.submit(unzip_client_jar, mc_version) for mc_version in mc_versions]
         for future in as_completed(futures):
             future.result()
 
-def unzip_single_jar(mc_version: str):
+def unzip_client_jar(mc_version: str):
         version_dir = os.path.join(BUILD_PROCESS_DIR, mc_version)
-        jar_path = os.path.join(version_dir, "mc_client.jar")
+        jar_path = os.path.join(version_dir, "client.jar")
         if os.path.exists(jar_path):
             with zipfile.ZipFile(jar_path, 'r') as zip_ref:
                 zip_ref.extractall(version_dir)
@@ -74,11 +81,11 @@ def unzip_single_jar(mc_version: str):
 @time_this
 def clean_process_version_directories(mc_versions: list):
     with ThreadPoolExecutor() as executor:
-        futures = [executor.submit(clean_single_version_directory, mc_version) for mc_version in mc_versions]
+        futures = [executor.submit(clean_process_version_directory, mc_version) for mc_version in mc_versions]
         for future in as_completed(futures):
             future.result()
 
-def clean_single_version_directory(mc_version: str):
+def clean_process_version_directory(mc_version: str):
         version_dir = os.path.join(BUILD_PROCESS_DIR, mc_version)
         for root, dirs, files in os.walk(version_dir):
             for name in files:
