@@ -7,9 +7,8 @@ from typing import Any
 
 import requests
 
+from start import BUILD_REFERENCE_DIR
 from timing import time_this
-
-BUILD_PROCESS_DIR = "../build/process"
 
 
 @time_this
@@ -58,7 +57,7 @@ def download_client_jar(mc_version: str, manifest: dict[str, Any]) -> bool:
         return False
 
     client_url = version_response.json()["downloads"]["client"]["url"]
-    download_path = os.path.join(BUILD_PROCESS_DIR, mc_version, "client.jar")
+    download_path = os.path.join(BUILD_REFERENCE_DIR, mc_version, "client.jar")
     os.makedirs(os.path.dirname(download_path), exist_ok=True)
     client_response = requests.get(client_url)
     if client_response.status_code != 200:
@@ -80,7 +79,7 @@ def unzip_client_jars(mc_versions: list[str]) -> None:
 
 
 def unzip_client_jar(mc_version: str) -> None:
-    version_dir = os.path.join(BUILD_PROCESS_DIR, mc_version)
+    version_dir = os.path.join(BUILD_REFERENCE_DIR, mc_version)
     jar_path = os.path.join(version_dir, "client.jar")
     if os.path.exists(jar_path):
         with zipfile.ZipFile(jar_path, 'r') as zip_ref:
@@ -97,7 +96,7 @@ def clean_process_version_directories(mc_versions: list[str]) -> None:
 
 
 def clean_process_version_directory(mc_version: str) -> None:
-    version_dir = os.path.join(BUILD_PROCESS_DIR, mc_version)
+    version_dir = os.path.join(BUILD_REFERENCE_DIR, mc_version)
     for root, dirs, files in os.walk(version_dir):
         for name in files:
             if not (name.startswith("assets" + os.sep) and name.startswith("data" + os.sep)):
