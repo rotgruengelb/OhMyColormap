@@ -1,5 +1,5 @@
 import logging
-import os
+import pathlib
 import shutil
 import zipfile
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -57,8 +57,8 @@ def download_client_jar(mc_version: str, manifest: dict[str, Any]) -> bool:
         return False
 
     client_url = version_response.json()["downloads"]["client"]["url"]
-    download_path = os.path.join(BUILD_REFERENCE_DIR, mc_version, "client.jar")
-    os.makedirs(os.path.dirname(download_path), exist_ok=True)
+    download_path = pathlib.Path(BUILD_REFERENCE_DIR) / mc_version / "client.jar"
+    download_path.parent.mkdir(parents=True, exist_ok=True)
     client_response = requests.get(client_url)
     if client_response.status_code != 200:
         logging.error(f"Failed to download client jar for {mc_version}")
@@ -79,9 +79,9 @@ def unzip_client_jars(mc_versions: list[str]) -> None:
 
 
 def unzip_client_jar(mc_version: str) -> None:
-    version_dir = os.path.join(BUILD_REFERENCE_DIR, mc_version)
-    jar_path = os.path.join(version_dir, "client.jar")
-    if os.path.exists(jar_path):
+    version_dir = pathlib.Path(BUILD_REFERENCE_DIR) / mc_version
+    jar_path = version_dir / "client.jar"
+    if jar_path.exists():
         with zipfile.ZipFile(jar_path, 'r') as zip_ref:
             zip_ref.extractall(version_dir)
         logging.info(f"Unzipped {jar_path}")
@@ -96,14 +96,14 @@ def clean_process_version_directories(mc_versions: list[str]) -> None:
 
 
 def clean_process_version_directory(mc_version: str) -> None:
-    version_dir = os.path.join(BUILD_REFERENCE_DIR, mc_version)
-    for root, dirs, files in os.walk(version_dir):
+    version_dir = pathlib.Path(BUILD_REFERENCE_DIR) / mc_version
+    for root, dirs, files in version_dir.walk():
         for name in files:
-            if not (name.startswith("assets" + os.sep) and name.startswith("data" + os.sep)):
-                file_path = os.path.join(root, name)
-                os.remove(file_path)
+            file_path = pathlib.Path(root) / name
+            if not (file_path.match("assets/*") or file_path.match("data/*")):
+                file_path.unlink()
         for name in dirs:
-            if not (name == "assets" or name == "data"):
-                dir_path = os.path.join(root, name)
+            dir_path = pathlib.Path(root) / name
+            if not (dir_path.name == "assets" or dir_path.name == "data"):
                 shutil.rmtree(dir_path)
     logging.info(f"Cleaned {version_dir}")
