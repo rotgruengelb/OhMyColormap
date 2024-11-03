@@ -1,0 +1,16 @@
+{
+    "tricolor_u": {
+        "version": 1,
+        "expects": 3,
+        "background": {
+            "before": ["common/background_dark_base.png"],
+            "templating_colors": ["#FF0000", "#00FF00", "#0000FF"],
+            "template": "tricolor/uniform/background_colors.png"
+        },
+        "frame": {
+            "templating_colors": ["#FF0000", "#00FF00", "#0000FF"],
+            "template": "tricolor/uniform/frame.png"
+        },
+        "merge_background_into_frame": true
+    }
+}

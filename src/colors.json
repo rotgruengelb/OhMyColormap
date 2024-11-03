@@ -1,0 +1,20 @@
+[
+    {
+        "version": 1,
+        "name": "bisexual",
+        "styles": ["tricolor_u"],
+        "colors": ["#d60270", "#9b4f96", "#0038a8"]
+    },
+    {
+        "version": 1,
+        "name": "pansexual",
+        "styles": ["tricolor_u"],
+        "colors": ["#ff1b8d", "#ffd800", "#21b1ff"]
+    },
+    {
+        "version": 1,
+        "name": "polysexual",
+        "styles": ["tricolor_u"],
+        "colors": ["#F714BA", "#01D66A", "#1594F6"]
+    }
+]
