@@ -1,20 +1,51 @@
 [
     {
         "version": 1,
-        "name": "bisexual",
-        "styles": ["tricolor_u"],
+        "name": "bi",
+        "description_name": "Bi Pride",
+        "styles": ["3color_full_eq", "3color_frame_eq"],
         "colors": ["#d60270", "#9b4f96", "#0038a8"]
     },
     {
         "version": 1,
-        "name": "pansexual",
-        "styles": ["tricolor_u"],
+        "name": "pan",
+        "description_name": "Pan Pride",
+        "styles": ["3color_full_eq", "3color_frame_eq"],
         "colors": ["#ff1b8d", "#ffd800", "#21b1ff"]
     },
     {
         "version": 1,
-        "name": "polysexual",
-        "styles": ["tricolor_u"],
+        "name": "poly",
+        "description_name": "Poly Pride",
+        "styles": ["3color_full_eq", "3color_frame_eq"],
         "colors": ["#F714BA", "#01D66A", "#1594F6"]
+    },
+    {
+        "version": 1,
+        "name": "gay_men",
+        "description_name": "Gay Men Pride",
+        "styles": ["5color_full_eq", "5color_frame_eq"],
+        "colors": ["#018e71", "#99e9c2", "#ffffff", "#7cafe3", "#3b1379"]
+    },
+    {
+        "version": 1,
+        "name": "lesbian",
+        "description_name": "Lesbian Pride",
+        "styles": ["5color_full_eq", "5color_frame_eq"],
+        "colors": ["#d52d00", "#ff9a56", "#ffffff", "#d362a4", "#a30262"]
+    },
+    {
+        "version": 1,
+        "name": "trans",
+        "description_name": "Trans Pride",
+        "styles": ["5color_full_eq", "5color_frame_eq"],
+        "colors": ["#5bcffa", "#f5abb9", "#ffffff", "#f5abb9", "#5bcffa"]
+    },
+    {
+        "version": 1,
+        "name": "trans",
+        "description_name": "Trans Pride",
+        "styles": ["3color_full_eq", "3color_frame_eq"],
+        "colors": ["#5bcffa", "#f5abb9", "#ffffff"]
     }
 ]

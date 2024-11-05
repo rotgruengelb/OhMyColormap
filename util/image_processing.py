@@ -65,9 +65,12 @@ def apply_template(template_config: dict, replacement_colors: ColorList) -> Imag
     Returns:
         Image: The templated image.
     """
-    target_colors = [convert_hex_to_rgb(c) for c in template_config['templating_colors']]
-    base_template = Image.open(Path('src') / template_config['template']).convert("RGBA")
-    composed_image = Image.new("RGBA", base_template.size).convert("RGBA")
+    size = (100, 100)
+    if 'template' in template_config:
+        target_colors = [convert_hex_to_rgb(c) for c in template_config['templating_colors']]
+        base_template = Image.open(Path('src') / template_config['template']).convert("RGBA")
+        size = base_template.size
+    composed_image = Image.new("RGBA", size).convert("RGBA")
 
     # Apply 'before' layer images if they exist
     if 'before' in template_config:
@@ -76,8 +79,10 @@ def apply_template(template_config: dict, replacement_colors: ColorList) -> Imag
             composed_image = Image.alpha_composite(composed_image, layer_image)
 
     # Apply color replacements and compose with the template
-    replaced_image = generate_image_from_template(base_template, target_colors, replacement_colors)
-    composed_image = Image.alpha_composite(composed_image, replaced_image)
+    if 'template' in template_config:
+        # noinspection PyUnboundLocalVariable
+        replaced_image = generate_image_from_template(base_template, target_colors, replacement_colors)
+        composed_image = Image.alpha_composite(composed_image, replaced_image)
 
     # Apply 'after' layer images if they exist
     if 'after' in template_config:

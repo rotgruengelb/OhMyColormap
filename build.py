@@ -22,7 +22,7 @@ def main():
             style_config = styles[style_name]
 
             # Generate pack name and set up working directory path
-            pack_name = f"{palette['name']}-{style_name}+{palette['version']}-{style_config['version']}"
+            pack_name = f"{palette['name']}-{style_name}-{palette['version']}+{style_config['version']}"
             build_out_path = BUILD_PATH / pack_name
 
             # Convert hex colors to RGB tuples
@@ -37,7 +37,7 @@ def main():
             tooltip_path.mkdir(parents=True, exist_ok=True)
 
             # Save images based on style configuration
-            if style_config['merge_background_into_frame']:
+            if 'merge_background_into_frame' in style_config and style_config['merge_background_into_frame']:
                 Image.alpha_composite(background_image, frame_image).save(tooltip_path / 'frame.png')
                 shutil.copytree(Path('util/assets/tooltip_use_only_frame'), tooltip_path, dirs_exist_ok=True)
             else:
@@ -45,7 +45,8 @@ def main():
                 frame_image.save(tooltip_path / 'frame.png')
 
             # Generate `pack.mcmeta` and add common files
-            create_pack_metadata(build_out_path / 'pack.mcmeta', pack_name)
+            pack_description = f"PrideTooltips | {palette['description_name']} {style_config['description_name']}"
+            create_pack_metadata(build_out_path / 'pack.mcmeta', pack_description)
             shutil.copytree(Path('util/assets/tooltip_common'), tooltip_path, dirs_exist_ok=True)
 
             compress_and_remove_directory(build_out_path)

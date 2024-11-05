@@ -1,9 +1,10 @@
 {
-    "tricolor_u": {
+    "3color_full_eq": {
+        "description_name": "Tricolor Flag",
         "version": 1,
         "expects": 3,
         "background": {
-            "before": ["common/background_dark_base.png"],
+            "before": ["common/background_dark_compose.png"],
             "templating_colors": ["#FF0000", "#00FF00", "#0000FF"],
             "template": "tricolor/uniform/background_colors.png"
         },
@@ -12,5 +13,44 @@
             "template": "tricolor/uniform/frame.png"
         },
         "merge_background_into_frame": true
+    },
+    "3color_frame_eq": {
+        "description_name": "Frame-only Tricolor Flag",
+        "version": 1,
+        "expects": 3,
+        "background": {
+            "before": ["common/background_dark.png"]
+        },
+        "frame": {
+            "templating_colors": ["#FF0000", "#00FF00", "#0000FF"],
+            "template": "tricolor/uniform/frame.png"
+        }
+    },
+    "5color_full_eq": {
+        "description_name": "5-Color Flag",
+        "version": 1,
+        "expects": 5,
+        "background": {
+            "before": ["common/background_dark_compose.png"],
+            "templating_colors": ["#FF0000", "#FFFF00", "#00FF00", "#0000FF", "#FF00FF"],
+            "template": "5color/uniform/background_colors.png"
+        },
+        "frame": {
+            "templating_colors": ["#FF0000", "#FFFF00", "#00FF00", "#0000FF", "#FF00FF"],
+            "template": "5color/uniform/frame.png"
+        },
+        "merge_background_into_frame": true
+    },
+    "5color_frame_eq": {
+        "description_name": "Frame-only 5-Color Flag",
+        "version": 1,
+        "expects": 5,
+        "background": {
+            "before": ["common/background_dark.png"]
+        },
+        "frame": {
+            "templating_colors": ["#FF0000", "#FFFF00", "#00FF00", "#0000FF", "#FF00FF"],
+            "template": "5color/uniform/frame.png"
+        }
     }
 }
