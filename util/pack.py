@@ -1,6 +1,8 @@
 import json
 import shutil
 from pathlib import Path
+from random import choice as random_choice
+from string import ascii_lowercase
 
 
 def create_pack_metadata(path: Path, description: str, pack_format: int = 37):
@@ -23,6 +25,7 @@ def create_pack_metadata(path: Path, description: str, pack_format: int = 37):
         }
     }
     with path.open("w", encoding="utf-8") as file:
+        # noinspection PyTypeChecker
         json.dump(mcmeta_content, file, indent=2)
 
 
@@ -39,3 +42,22 @@ def compress_and_remove_directory(directory: Path, zip_name: str = None):
     zip_path = directory.with_suffix('.zip') if zip_name is None else directory.parent / f"{zip_name}.zip"
     shutil.make_archive(str(zip_path.with_suffix('')), 'zip', str(directory))
     shutil.rmtree(directory)
+
+
+def generate_random_word(length: int) -> str:
+    """
+    Generate a random lowercase word of a specified length.
+
+    Parameters:
+        length (int): The length of the word to generate. Must be a non-negative integer.
+
+    Returns:
+        str: A randomly generated word consisting of lowercase ASCII letters.
+
+    Raises:
+        ValueError: If the specified length is negative.
+    """
+    if length < 0:
+        raise ValueError("Length must be a non-negative integer.")
+
+    return ''.join(random_choice(ascii_lowercase) for _ in range(length))

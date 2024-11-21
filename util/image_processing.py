@@ -2,8 +2,6 @@ from PIL import Image, ImageFile
 from pathlib import Path
 
 Color = tuple[int, int, int]
-ColorList = list[Color]
-
 
 def convert_hex_to_rgb(hex_color: str) -> Color:
     """
@@ -22,7 +20,7 @@ def convert_hex_to_rgb(hex_color: str) -> Color:
     return tuple(int(hex_color[i:i + 2], 16) for i in (0, 2, 4))
 
 
-def generate_image_from_template(template_image: ImageFile, old_colors: ColorList, new_colors: ColorList) -> Image:
+def generate_image_from_template(template_image: ImageFile, old_colors: list[Color], new_colors: list[Color]) -> Image:
     """
     Create a new PNG image based on an input image, replacing specified colors with new colors.
 
@@ -54,7 +52,7 @@ def generate_image_from_template(template_image: ImageFile, old_colors: ColorLis
     return new_image
 
 
-def apply_template(template_config: dict, replacement_colors: ColorList) -> Image:
+def apply_template(template_config: dict, replacement_colors: list[Color]) -> Image:
     """
     Apply templating on an image with layers and color replacements.
 
@@ -91,3 +89,101 @@ def apply_template(template_config: dict, replacement_colors: ColorList) -> Imag
             composed_image = Image.alpha_composite(composed_image, layer_image)
 
     return composed_image
+
+
+from PIL import Image
+
+
+def nine_slice_scale(image: ImageFile, left: int, top: int, right: int, bottom: int, width: int, height: int, tile=False, padding=(0, 0, 0, 0)) -> Image:
+    """
+    Scales an image using 9-slice scaling, accounting for padding.
+
+    Args:
+        image (ImageFile): The source image.
+        left (int): Width of the left fixed slice.
+        top (int): Height of the top fixed slice.
+        right (int): Width of the right fixed slice.
+        bottom (int): Height of the bottom fixed slice.
+        width (int): Target width of the output image.
+        height (int): Target height of the output image.
+        tile (bool): Whether to tile or stretch the scalable parts.
+        padding (tuple): Padding (left, top, right, bottom) to discard from the source image.
+
+    Returns:
+        PIL.Image.Image: The resized image with 9-slice scaling applied.
+    """
+    pad_left, pad_top, pad_right, pad_bottom = padding
+    src_width, src_height = image.size
+
+    # Crop the image to exclude the padding
+    cropped_image = image.crop((
+        pad_left,
+        pad_top,
+        src_width - pad_right,
+        src_height - pad_bottom
+    ))
+    cropped_width, cropped_height = cropped_image.size
+
+    # Define the areas for slicing
+    slices = {
+        "top_left": (0, 0, left, top),
+        "top": (left, 0, cropped_width - right, top),
+        "top_right": (cropped_width - right, 0, cropped_width, top),
+        "left": (0, top, left, cropped_height - bottom),
+        "center": (left, top, cropped_width - right, cropped_height - bottom),
+        "right": (cropped_width - right, top, cropped_width, cropped_height - bottom),
+        "bottom_left": (0, cropped_height - bottom, left, cropped_height),
+        "bottom": (left, cropped_height - bottom, cropped_width - right, cropped_height),
+        "bottom_right": (cropped_width - right, cropped_height - bottom, cropped_width, cropped_height),
+    }
+
+    # Calculate target areas
+    target_slices = {
+        "top_left": (0, 0, left, top),
+        "top": (left, 0, width - right, top),
+        "top_right": (width - right, 0, width, top),
+        "left": (0, top, left, height - bottom),
+        "center": (left, top, width - right, height - bottom),
+        "right": (width - right, top, width, height - bottom),
+        "bottom_left": (0, height - bottom, left, height),
+        "bottom": (left, height - bottom, width - right, height),
+        "bottom_right": (width - right, height - bottom, width, height),
+    }
+
+    # Create the new image
+    result = Image.new("RGBA", (width, height))
+
+    for key, box in slices.items():
+        region = cropped_image.crop(box)
+        target_box = target_slices[key]
+        target_width = target_box[2] - target_box[0]
+        target_height = target_box[3] - target_box[1]
+
+        if key in ["top", "center", "bottom"] and tile:
+            # Tile horizontally
+            tiled = Image.new("RGBA", (target_width, region.height))
+            for x in range(0, target_width, region.width):
+                tiled.paste(region, (x, 0))
+            region = tiled
+        elif key in ["left", "center", "right"] and tile:
+            # Tile vertically
+            tiled = Image.new("RGBA", (region.width, target_height))
+            for y in range(0, target_height, region.height):
+                tiled.paste(region, (0, y))
+            region = tiled
+
+        # Resize or use the tiled image
+        if key == "center" and tile:
+            tiled = Image.new("RGBA", (target_width, target_height))
+            for x in range(0, target_width, region.width):
+                for y in range(0, target_height, region.height):
+                    tiled.paste(
+                        region.crop((0, 0, min(region.width, target_width - x), min(region.height, target_height - y))),
+                        (x, y))
+            region = tiled
+        elif not tile or key in ["top", "bottom", "left", "right", "center"]:
+            region = region.resize((target_width, target_height), Image.Resampling.NEAREST)
+
+        result.paste(region, target_box[:2])
+
+    return result

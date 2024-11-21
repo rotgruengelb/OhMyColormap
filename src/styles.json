@@ -1,5 +1,5 @@
 {
-    "3color_full_eq": {
+    "3clr-full": {
         "description_name": "Tricolor Flag",
         "version": 1,
         "expects": 3,
@@ -14,7 +14,7 @@
         },
         "merge_background_into_frame": true
     },
-    "3color_frame_eq": {
+    "3clr-frame": {
         "description_name": "Frame-only Tricolor Flag",
         "version": 1,
         "expects": 3,
@@ -26,7 +26,7 @@
             "template": "tricolor/uniform/frame.png"
         }
     },
-    "5color_full_eq": {
+    "5clr-full": {
         "description_name": "5-Color Flag",
         "version": 1,
         "expects": 5,
@@ -41,7 +41,7 @@
         },
         "merge_background_into_frame": true
     },
-    "5color_frame_eq": {
+    "5clr-frame": {
         "description_name": "Frame-only 5-Color Flag",
         "version": 1,
         "expects": 5,
