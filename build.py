@@ -23,6 +23,7 @@ def main():
 
     for palette_name, palette in colors.items():
         palette_name: str = palette_name.split("/")[0]
+
         for style_name in palette['styles']:
             style_config = styles[style_name]
 

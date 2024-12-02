@@ -1,7 +1,9 @@
-from PIL import Image, ImageFile
 from pathlib import Path
 
+from PIL import Image, ImageFile
+
 Color = tuple[int, int, int]
+
 
 def convert_hex_to_rgb(hex_color: str) -> Color:
     """
@@ -94,7 +96,8 @@ def apply_template(template_config: dict, replacement_colors: list[Color]) -> Im
 from PIL import Image
 
 
-def nine_slice_scale(image: ImageFile, left: int, top: int, right: int, bottom: int, width: int, height: int, tile=False, padding=(0, 0, 0, 0)) -> Image:
+def nine_slice_scale(image: ImageFile, left: int, top: int, right: int, bottom: int, width: int, height: int,
+                     tile=False, padding=(0, 0, 0, 0)) -> Image:
     """
     Scales an image using 9-slice scaling, accounting for padding.
 
@@ -116,39 +119,24 @@ def nine_slice_scale(image: ImageFile, left: int, top: int, right: int, bottom: 
     src_width, src_height = image.size
 
     # Crop the image to exclude the padding
-    cropped_image = image.crop((
-        pad_left,
-        pad_top,
-        src_width - pad_right,
-        src_height - pad_bottom
-    ))
+    cropped_image = image.crop((pad_left, pad_top, src_width - pad_right, src_height - pad_bottom))
     cropped_width, cropped_height = cropped_image.size
 
     # Define the areas for slicing
-    slices = {
-        "top_left": (0, 0, left, top),
-        "top": (left, 0, cropped_width - right, top),
-        "top_right": (cropped_width - right, 0, cropped_width, top),
-        "left": (0, top, left, cropped_height - bottom),
+    slices = {"top_left": (0, 0, left, top), "top": (left, 0, cropped_width - right, top),
+        "top_right": (cropped_width - right, 0, cropped_width, top), "left": (0, top, left, cropped_height - bottom),
         "center": (left, top, cropped_width - right, cropped_height - bottom),
         "right": (cropped_width - right, top, cropped_width, cropped_height - bottom),
         "bottom_left": (0, cropped_height - bottom, left, cropped_height),
         "bottom": (left, cropped_height - bottom, cropped_width - right, cropped_height),
-        "bottom_right": (cropped_width - right, cropped_height - bottom, cropped_width, cropped_height),
-    }
+        "bottom_right": (cropped_width - right, cropped_height - bottom, cropped_width, cropped_height), }
 
     # Calculate target areas
-    target_slices = {
-        "top_left": (0, 0, left, top),
-        "top": (left, 0, width - right, top),
-        "top_right": (width - right, 0, width, top),
-        "left": (0, top, left, height - bottom),
-        "center": (left, top, width - right, height - bottom),
-        "right": (width - right, top, width, height - bottom),
-        "bottom_left": (0, height - bottom, left, height),
-        "bottom": (left, height - bottom, width - right, height),
-        "bottom_right": (width - right, height - bottom, width, height),
-    }
+    target_slices = {"top_left": (0, 0, left, top), "top": (left, 0, width - right, top),
+        "top_right": (width - right, 0, width, top), "left": (0, top, left, height - bottom),
+        "center": (left, top, width - right, height - bottom), "right": (width - right, top, width, height - bottom),
+        "bottom_left": (0, height - bottom, left, height), "bottom": (left, height - bottom, width - right, height),
+        "bottom_right": (width - right, height - bottom, width, height), }
 
     # Create the new image
     result = Image.new("RGBA", (width, height))
