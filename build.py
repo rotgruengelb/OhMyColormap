@@ -18,10 +18,11 @@ def main():
         styles = json.load(styles_file)
 
     # Load colors from JSON file
-    with open(SRC_PATH / 'colors2.json', 'r') as colors_file:
+    with open(SRC_PATH / 'colors.json', 'r') as colors_file:
         colors = json.load(colors_file)
 
     for palette_name, palette in colors.items():
+        palette_name: str = palette_name.split("/")[0]
         for style_name in palette['styles']:
             style_config = styles[style_name]
 
