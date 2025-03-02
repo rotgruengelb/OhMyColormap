@@ -9,7 +9,6 @@ A collection of resource packs that change tooltips to be colorful and/or pride 
 ### Rotgruengelb (Pride Tooltips Dev):
 
 [![Watch me on Youtube](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/social/youtube-singular_46h.png)](https://youtube.com/rotgruengelb)
-[![Chat with me on Twitter](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/social/twitter-singular_46h.png)](https://x.com/rotgruengelblab)
 [![See me on GitHub](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/social/github-singular_46h.png)](https://github.com/rotgruengelb)
 
 
