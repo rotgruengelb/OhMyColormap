@@ -26,6 +26,18 @@
             "template": "tricolor/uniform/frame.png"
         }
     },
+    "3clr-frame-altbg": {
+        "description_name": "Frame-only Tricolor Flag",
+        "version": 1,
+        "expects": 3,
+        "background": {
+            "before": ["common/background_default.png"]
+        },
+        "frame": {
+            "templating_colors": ["#FF0000", "#00FF00", "#0000FF"],
+            "template": "tricolor/uniform/frame.png"
+        }
+    },
     "5clr-full": {
         "description_name": "5-Color Flag",
         "version": 1,
@@ -47,6 +59,18 @@
         "expects": 5,
         "background": {
             "before": ["common/background_dark.png"]
+        },
+        "frame": {
+            "templating_colors": ["#FF0000", "#FFFF00", "#00FF00", "#0000FF", "#FF00FF"],
+            "template": "5color/uniform/frame.png"
+        }
+    },
+    "5clr-frame-altbg": {
+        "description_name": "Frame-only Alt-BG 5-Color Flag",
+        "version": 1,
+        "expects": 5,
+        "background": {
+            "before": ["common/background_default.png"]
         },
         "frame": {
             "templating_colors": ["#FF0000", "#FFFF00", "#00FF00", "#0000FF", "#FF00FF"],
