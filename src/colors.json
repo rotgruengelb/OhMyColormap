@@ -41,9 +41,9 @@
 			"#1594F6"
 		]
 	},
-	"gay_men": {
+	"gay_mlm": {
 		"version": 1,
-		"description_name": "Gay Men Pride",
+		"description_name": "Gay MLM Pride",
 		"styles": [
 			"5clr-full",
 			"5clr-frame",
