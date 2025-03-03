@@ -4,7 +4,8 @@
 		"description_name": "Bi Pride",
 		"styles": [
 			"3clr-full",
-			"3clr-frame"
+			"3clr-frame",
+			"3clr-frame-altbg"
 		],
 		"colors": [
 			"#d60270",
@@ -17,7 +18,8 @@
 		"description_name": "Pan Pride",
 		"styles": [
 			"3clr-full",
-			"3clr-frame"
+			"3clr-frame",
+			"3clr-frame-altbg"
 		],
 		"colors": [
 			"#ff1b8d",
@@ -30,7 +32,8 @@
 		"description_name": "Poly Pride",
 		"styles": [
 			"3clr-full",
-			"3clr-frame"
+			"3clr-frame",
+			"3clr-frame-altbg"
 		],
 		"colors": [
 			"#F714BA",
@@ -43,7 +46,8 @@
 		"description_name": "Gay Men Pride",
 		"styles": [
 			"5clr-full",
-			"5clr-frame"
+			"5clr-frame",
+			"5clr-frame-altbg"
 		],
 		"colors": [
 			"#018e71",
@@ -58,7 +62,8 @@
 		"description_name": "Lesbian Pride",
 		"styles": [
 			"5clr-full",
-			"5clr-frame"
+			"5clr-frame",
+			"5clr-frame-altbg"
 		],
 		"colors": [
 			"#d52d00",
@@ -73,7 +78,8 @@
 		"description_name": "Trans Pride",
 		"styles": [
 			"5clr-full",
-			"5clr-frame"
+			"5clr-frame",
+			"5clr-frame-altbg"
 		],
 		"colors": [
 			"#5bcffa",
@@ -88,7 +94,8 @@
 		"description_name": "Trans Pride",
 		"styles": [
 			"3clr-full",
-			"3clr-frame"
+			"3clr-frame",
+			"3clr-frame-altbg"
 		],
 		"colors": [
 			"#5bcffa",
