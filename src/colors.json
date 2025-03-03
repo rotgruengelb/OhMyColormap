@@ -1,7 +1,7 @@
 {
-	"bi": {
+	"bisexual": {
 		"version": 1,
-		"description_name": "Bi Pride",
+		"description_name": "Bisexual Pride",
 		"styles": [
 			"3clr-full",
 			"3clr-frame",
@@ -13,9 +13,9 @@
 			"#0038a8"
 		]
 	},
-	"pan": {
+	"pansexual": {
 		"version": 1,
-		"description_name": "Pan Pride",
+		"description_name": "Pansexual Pride",
 		"styles": [
 			"3clr-full",
 			"3clr-frame",
@@ -27,9 +27,9 @@
 			"#21b1ff"
 		]
 	},
-	"poly": {
+	"polysexual": {
 		"version": 1,
-		"description_name": "Poly Pride",
+		"description_name": "Polysexual Pride",
 		"styles": [
 			"3clr-full",
 			"3clr-frame",
@@ -73,9 +73,9 @@
 			"#a30262"
 		]
 	},
-	"trans/0": {
+	"transgender/0": {
 		"version": 1,
-		"description_name": "Trans Pride",
+		"description_name": "Transgender Pride",
 		"styles": [
 			"5clr-full",
 			"5clr-frame",
@@ -89,9 +89,9 @@
 			"#5bcffa"
 		]
 	},
-	"trans/1": {
+	"transgender/1": {
 		"version": 1,
-		"description_name": "Trans Pride",
+		"description_name": "Transgender Pride",
 		"styles": [
 			"3clr-full",
 			"3clr-frame",
