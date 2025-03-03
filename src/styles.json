@@ -76,5 +76,44 @@
             "templating_colors": ["#FF0000", "#FFFF00", "#00FF00", "#0000FF", "#FF00FF"],
             "template": "5color/uniform/frame.png"
         }
+    },
+    "7clr-full": {
+        "description_name": "7-Color Flag",
+        "version": 1,
+        "expects": 5,
+        "background": {
+            "before": ["common/background_dark_compose.png"],
+            "templating_colors": ["#FF0000", "#FFFF00", "#00FF00", "#0000FF", "#FF00FF", "#00FFFF", "#FFFFFF"],
+            "template": "7color/uniform/background_colors.png"
+        },
+        "frame": {
+            "templating_colors": ["#FF0000", "#FFFF00", "#00FF00", "#0000FF", "#FF00FF", "#00FFFF", "#FFFFFF"],
+            "template": "7color/uniform/frame.png"
+        },
+        "merge_background_into_frame": true
+    },
+    "7clr-frame": {
+        "description_name": "Frame-only 7-Color Flag",
+        "version": 1,
+        "expects": 5,
+        "background": {
+            "before": ["common/background_dark.png"]
+        },
+        "frame": {
+            "templating_colors": ["#FF0000", "#FFFF00", "#00FF00", "#0000FF", "#FF00FF", "#00FFFF", "#FFFFFF"],
+            "template": "7color/uniform/frame.png"
+        }
+    },
+    "7clr-frame-altbg": {
+        "description_name": "Frame-only Alt-BG 7-Color Flag",
+        "version": 1,
+        "expects": 5,
+        "background": {
+            "before": ["common/background_default.png"]
+        },
+        "frame": {
+            "templating_colors": ["#FF0000", "#FFFF00", "#00FF00", "#0000FF", "#FF00FF", "#00FFFF", "#FFFFFF"],
+            "template": "7color/uniform/frame.png"
+        }
     }
 }
