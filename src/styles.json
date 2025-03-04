@@ -115,5 +115,58 @@
             "templating_colors": ["#FF0000", "#FFFF00", "#00FF00", "#0000FF", "#FF00FF", "#00FFFF", "#FFFFFF"],
             "template": "7color/uniform/frame.png"
         }
+    },
+    "mono-full": {
+        "description_name": "Monochrome",
+        "version": 1,
+        "expects": 1,
+        "background": {
+            "before": ["common/background_dark_compose.png"],
+            "templating_colors": ["#0000FF"],
+            "template": "monochrome/background_colors.png"
+        },
+        "frame": {
+            "templating_colors": ["#0000FF"],
+            "template": "monochrome/frame.png"
+        },
+        "merge_background_into_frame": true
+    },
+    "mono-frame": {
+        "description_name": "Frame-only Monochrome",
+        "version": 1,
+        "expects": 1,
+        "background": {
+            "before": ["common/background_dark.png"]
+        },
+        "frame": {
+            "templating_colors": ["#0000FF"],
+            "template": "monochrome/frame.png"
+        }
+    },
+    "mono-frame-altbg": {
+        "description_name": "Frame-only Alt-BG Monochrome",
+        "version": 1,
+        "expects": 1,
+        "background": {
+            "before": ["common/background_default.png"]
+        },
+        "frame": {
+            "templating_colors": ["#0000FF"],
+            "template": "monochrome/frame.png"
+        }
+    },
+    "separate-mono-bg-frame": {
+        "description_name": "Separate Monochrome Background/Frame",
+        "version": 1,
+        "expects": 2,
+        "background": {
+            "before": ["common/background_dark_compose.png"],
+            "templating_colors": ["#FF0000", "#0000FF"],
+            "template": "monochrome/background_colors2.png"
+        },
+        "frame": {
+            "templating_colors": ["#FF0000", "#0000FF"],
+            "template": "monochrome/frame.png"
+        }
     }
 }
