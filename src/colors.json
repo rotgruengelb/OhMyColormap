@@ -41,7 +41,7 @@
 			"#1594F6"
 		]
 	},
-	"gay_mlm": {
+	"gay_mlm/0": {
 		"version": 1,
 		"description_name": "Gay MLM Pride",
 		"styles": [
@@ -57,7 +57,25 @@
 			"#3b1379"
 		]
 	},
-	"lesbian": {
+	"gay_mlm/1": {
+		"version": 1,
+		"description_name": "Gay MLM Pride",
+		"styles": [
+			"7clr-full",
+			"7clr-frame",
+			"7clr-frame-altbg"
+		],
+		"colors": [
+			"#018e71",
+			"#26ceaa",
+			"#98e8c1",
+			"#ffffff",
+			"#7bade2",
+			"#5049cc",
+			"#3d1a78"
+		]
+	},
+	"lesbian/0": {
 		"version": 1,
 		"description_name": "Lesbian Pride",
 		"styles": [
@@ -70,6 +88,24 @@
 			"#ff9a56",
 			"#ffffff",
 			"#d362a4",
+			"#a30262"
+		]
+	},
+	"lesbian/1": {
+		"version": 1,
+		"description_name": "Lesbian Pride",
+		"styles": [
+			"7clr-full",
+			"7clr-frame",
+			"7clr-frame-altbg"
+		],
+		"colors": [
+			"#d52d00",
+			"#ef7627",
+			"#ff9a56",
+			"#ffffff",
+			"#d162a4",
+			"#b55690",
 			"#a30262"
 		]
 	},
@@ -101,6 +137,42 @@
 			"#5bcffa",
 			"#f5abb9",
 			"#ffffff"
+		]
+	},
+	"agender": {
+		"version": 1,
+		"description_name": "Agender Pride",
+		"styles": [
+			"7clr-full",
+			"7clr-frame",
+			"7clr-frame-altbg"
+		],
+		"colors": [
+			"#000000",
+			"#bababa",
+			"#ffffff",
+			"#b7f38b",
+			"#ffffff",
+			"#bababa",
+			"#000000"
+		]
+	},
+	"bigender": {
+		"version": 1,
+		"description_name": "Bigender Pride",
+		"styles": [
+			"7clr-full",
+			"7clr-frame",
+			"7clr-frame-altbg"
+		],
+		"colors": [
+			"#c982a5",
+			"#edaacb",
+			"#d7c8e8",
+			"#ffffff",
+			"#d7c8e8",
+			"#9dc7e7",
+			"#6f83cd"
 		]
 	}
 }
