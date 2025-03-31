@@ -4,6 +4,7 @@ from pathlib import Path
 
 from PIL import Image
 from PIL.Image import Resampling
+from tqdm import tqdm
 
 from util.image_processing import apply_template, convert_hex_to_rgb, nine_slice_scale
 from util.pack import create_pack_metadata, compress_and_remove_directory, generate_random_word
@@ -21,15 +22,20 @@ def main():
     with open(SRC_PATH / 'colors.json', 'r') as colors_file:
         colors = json.load(colors_file)
 
-    for palette_name, palette in colors.items():
+    tqdm_palettes = tqdm(colors.items(), leave=False)
+    for palette_name, palette in tqdm_palettes:
+        tqdm_palettes.set_description_str(f"Palettes ({palette_name})")
+
         palette_name: str = palette_name.split("/")[0]
 
-        for style_name in palette['styles']:
+        tqdm_styles = tqdm(palette['styles'], leave=False)
+        for style_name in tqdm_styles:
+            tqdm_styles.set_description_str(f"Styles ({style_name})")
+
             style_config = styles[style_name]
 
             # Generate pack name and set up working directory path
             pack_name = f"tooltip_{palette_name}.v{palette['version']}+{style_name}.v{style_config['version']}.{generate_random_word(8)}"
-            print(f"Generating pack: {pack_name}")
 
             build_out_path = BUILD_PATH / pack_name
 
