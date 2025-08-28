@@ -148,13 +148,13 @@
 			"7clr-frame-altbg"
 		],
 		"colors": [
-			"#000000",
+			"#232323",
 			"#bababa",
 			"#ffffff",
 			"#b7f38b",
 			"#ffffff",
 			"#bababa",
-			"#000000"
+			"#232323"
 		]
 	},
 	"bigender": {
@@ -173,6 +173,367 @@
 			"#d7c8e8",
 			"#9dc7e7",
 			"#6f83cd"
+		]
+	},
+	"blue": {
+		"version": 1,
+		"description_name": "Blue",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#0038a8"
+		]
+	},
+	"orange": {
+		"version": 1,
+		"description_name": "Orange",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#f9ab02"
+		]
+	},
+	"bright_green": {
+		"version": 1,
+		"description_name": "Bright Green",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#9ff902"
+		]
+	},
+	"red": {
+		"version": 1,
+		"description_name": "Red",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#d52d00"
+		]
+	},
+	"teal/0": {
+		"version": 1,
+		"description_name": "Teal",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#018e71"
+		]
+	},
+	"teal/1": {
+		"version": 1,
+		"description_name": "Teal",
+		"styles": [
+			"separate-mono-bg-frame"
+		],
+		"colors": [
+			"#00241c",
+			"#018e71"
+		]
+	},
+	"green": {
+		"version": 1,
+		"description_name": "Green",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#00ff00"
+		]
+	},
+	"soft_blue": {
+		"version": 1,
+		"description_name": "Soft Blue",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#7bade2"
+		]
+	},
+	"purple/0": {
+		"version": 1,
+		"description_name": "Purple",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#ac2afc"
+		]
+	},
+	"purple/1": {
+		"version": 1,
+		"description_name": "Purple",
+		"styles": [
+			"separate-mono-bg-frame"
+		],
+		"colors": [
+			"#230934",
+			"#ac2afc"
+		]
+	},
+	"yellow": {
+		"version": 1,
+		"description_name": "Yellow",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#ffd800"
+		]
+	},
+	"dark_gray": {
+		"version": 1,
+		"description_name": "Dark Gray",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#232323"
+		]
+	},
+	"black/0": {
+		"version": 1,
+		"description_name": "Black",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#000000"
+		]
+	},
+	"black/1": {
+		"version": 1,
+		"description_name": "Black",
+		"styles": [
+			"separate-mono-bg-frame"
+		],
+		"colors": [
+			"#000000",
+			"#000000"
+		]
+	},
+	"white": {
+		"version": 1,
+		"description_name": "White",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#ffffff"
+		]
+	},
+	"pink_red_blue": {
+		"version": 1,
+		"description_name": "Pink Red, Blue-Frame",
+		"styles": [
+			"separate-mono-bg-frame"
+		],
+		"colors": [
+			"#2c0518",
+			"#21b1ff"
+		]
+	},
+	"blue_teal": {
+		"version": 1,
+		"description_name": "Blue, Teal-Frame",
+		"styles": [
+			"separate-mono-bg-frame"
+		],
+		"colors": [
+			"#21b1ff",
+			"#018e71"
+		]
+	},
+	"sand/0": {
+		"version": 1,
+		"description_name": "Sand Themed",
+		"styles": [
+			"separate-mono-bg-frame"
+		],
+		"colors": [
+			"#2f2e28",
+			"#eae8ca"
+		]
+	},
+		"sand/1": {
+		"version": 1,
+		"description_name": "Sand Themed",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#eae8ca"
+		]
+	},
+	"light_pink": {
+		"version": 1,
+		"description_name": "Light Pink",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#f5abb9"
+		]
+	},
+	"magenta": {
+		"version": 1,
+		"description_name": "Magenta",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#ff00ff"
+		]
+	},
+	"cyan": {
+		"version": 1,
+		"description_name": "Cyan",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#00ffff"
+		]
+	},
+	"gray": {
+		"version": 1,
+		"description_name": "Gray",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#808080"
+		]
+	},
+	"light_gray": {
+		"version": 1,
+		"description_name": "Light Gray",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#bababa"
+		]
+	},
+	"navy": {
+		"version": 1,
+		"description_name": "Navy Blue",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#000080"
+		]
+	},
+	"dark_green": {
+		"version": 1,
+		"description_name": "Dark Green",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#006400"
+		]
+	},
+	"red_blue": {
+		"version": 1,
+		"description_name": "Red, Blue-Frame",
+		"styles": [
+			"separate-mono-bg-frame"
+		],
+		"colors": [
+			"#d52d00",
+			"#0038a8"
+		]
+	},
+	"orange_purple": {
+		"version": 1,
+		"description_name": "Orange, Purple-Frame",
+		"styles": [
+			"separate-mono-bg-frame"
+		],
+		"colors": [
+			"#f9ab02",
+			"#ac2afc"
+		]
+	},
+	"white_blue": {
+		"version": 1,
+		"description_name": "White, Blue-Frame",
+		"styles": [
+			"separate-mono-bg-frame"
+		],
+		"colors": [
+			"#303030",
+			"#0038a8"
+		]
+	},
+	"green_magenta": {
+		"version": 1,
+		"description_name": "Green, Magenta-Frame",
+		"styles": [
+			"separate-mono-bg-frame"
+		],
+		"colors": [
+			"#00ff00",
+			"#ff00ff"
+		]
+	},
+	"cyan_pink": {
+		"version": 1,
+		"description_name": "Cyan, Pink-Frame",
+		"styles": [
+			"separate-mono-bg-frame"
+		],
+		"colors": [
+			"#003b3b",
+			"#ffb2c1"
 		]
 	}
 }
