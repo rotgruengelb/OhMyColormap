@@ -160,12 +160,11 @@
         "version": 1,
         "expects": 2,
         "background": {
-            "before": ["common/background_dark_compose.png"],
-            "templating_colors": ["#FF0000", "#0000FF"],
-            "template": "monochrome/background_colors2.png"
+            "templating_colors": ["#100010", "#0000FF"],
+            "template": "common/background_default.png"
         },
         "frame": {
-            "templating_colors": ["#FF0000", "#0000FF"],
+            "templating_colors": ["#100010", "#0000FF"],
             "template": "monochrome/frame.png"
         }
     }
