@@ -44,6 +44,7 @@ def main():
         logger.error(f"Failed to load configuration files: {e}", exc_info=True)
         return
 
+    district_pack_count = 0
     for palette_name, palette in colors.items():
         palette_name: str = palette_name.split("/")[0]
         logger.info(f"Processing palette '{palette_name}'")
@@ -57,8 +58,13 @@ def main():
             pack_version = f"v{palette['version']}+v{style_config['version']}"
             pack_name = f"tooltip_{palette_name}.v{palette['version']}+{style_name}.v{style_config['version']}"
             pack_friendly_name = f"{palette['description_name']} Tooltip ({style_config['description_name']})"
-            color_palette_collection = palette.get('collection_id', "not_available")
+            color_palette_collection = palette.get('collection_id', "!remove_line!")
             build_pack_dir_name = f"{pack_name}.{generate_random_word(8)}"
+            pack_friendly_name_description = pack_friendly_name.replace(" Tooltip", "")
+            if "Flag" in pack_friendly_name_description:
+                pack_friendly_name_description = f"a {pack_friendly_name_description}"
+            else:
+                pack_friendly_name_description = f"be {pack_friendly_name_description}"
 
             build_out_path = build / pack_name
             build_zip_collect_path = build_out_path / build_pack_dir_name
@@ -91,24 +97,39 @@ def main():
                 create_pack_metadata(build_zip_collect_path / 'pack.mcmeta', pack_friendly_name)
                 shutil.copytree(Path('src/resources/tooltip_common'), tooltip_path, dirs_exist_ok=True)
 
-                # Pack.png
-                logger.debug("\t\tGenerating pack.png")
+                logger.debug("\t\tGenerating pack.png & gallery image")
+
+                # Build base icon with transparency
                 base_icon_image = nine_slice_scale(background_frame_image, 2, 2, 2, 2, 51, 36, False, (8, 8, 8, 8))
                 base_icon_image = make_transparent(base_icon_image, 0.92)
-                text_overlay_image = Image.open(src / 'resources' / 'pack_png_tooltip_text.png')
 
-                unscaled_icon_image = Image.alpha_composite(
-                    Image.open(src / 'resources' / 'pack_png_tooltip_background.png'), base_icon_image)
-                unscaled_icon_image = Image.alpha_composite(unscaled_icon_image, text_overlay_image)
+                # Load overlay images
+                tooltip_text = Image.open(src / "resources" / "pack_png_tooltip_text.png")
+                tooltip_bg = Image.open(src / "resources" / "pack_png_tooltip_background.png")
+                gallery_bg = Image.open(src / "resources" / "pack_gallery_background.png")
+                gallery_overlay = Image.open(src / "resources" / "pack_gallery_overlay.png")
 
-                new_size = (unscaled_icon_image.width * 6, unscaled_icon_image.height * 6)
-                scaled_image = unscaled_icon_image.resize(new_size, Resampling.NEAREST)
+                # Compose unscaled icon
+                pack_png = Image.alpha_composite(tooltip_bg, base_icon_image)
+                pack_png = Image.alpha_composite(pack_png, tooltip_text)
 
-                pack_png = Image.new('RGBA', (256, 256), (0, 0, 0, 0))
-                pack_png.paste(scaled_image, (0, 18))
+                # Compose gallery
+                pack_gallery = Image.alpha_composite(gallery_bg, gallery_overlay)
+                icon_with_text = Image.alpha_composite(base_icon_image, tooltip_text)
+                pack_gallery.paste(icon_with_text, (42, 13), mask=icon_with_text)
 
-                pack_png.save(build_zip_collect_path / 'pack.png')
-                pack_png.save(build_out_path / f'{pack_name}.png')
+                # Scale up unscaled pack png
+                scaled_pack_png = (pack_png.width * 6, pack_png.height * 6)
+                scaled_pack_png = pack_png.resize(scaled_pack_png, Resampling.NEAREST)
+
+                # Final pack.png (256x256)
+                pack_png = Image.new("RGBA", (256, 256), (0, 0, 0, 0))
+                pack_png.paste(scaled_pack_png, (0, 18), mask=scaled_pack_png)
+
+                # Save outputs
+                pack_png.save(build_zip_collect_path / "pack.png")
+                pack_png.save(build_out_path / f"{pack_name}.png")
+                pack_gallery.save(build_out_path / f"gallery_{pack_name}.png")
 
                 # Compress
                 logger.debug(f"\t\tCompressing and finalizing {pack_name}")
@@ -116,19 +137,23 @@ def main():
 
                 # Markdown template
                 context = {"pack_slug": pack_slug, "pack_friendly_name": pack_friendly_name, "pack_name": pack_name,
-                           "pack_version": pack_version, "color_palette_name": palette['description_name'],
+                           "pack_friendly_name_description": pack_friendly_name_description,
+                           "pack_version": pack_version, "color_palette_name": palette["description_name"],
                            "color_palette_collection": color_palette_collection,
-                           "color_palette_formated": f"* {'\n* '.join(palette['colors'])}",
+                           "color_palette_formated": "* " + "\n* ".join(palette["colors"]),
                            "style_explanation": f"{style_config['description_name']} = {style_config['explanation']}",
-                           "build_time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"), "build_user": build_user, }
-                modrinth_markdown_template(src / 'resources' / 'modrinth.md', build_out_path / 'modrinth.md', context)
+                           "build_time": datetime.now().astimezone().isoformat(timespec="seconds"), "build_user": build_user}
+
+                modrinth_markdown_template(src / "resources" / "modrinth.md", build_out_path / "modrinth.md", context)
 
                 logger.info(f"\t\tFinished building {pack_name}")
+                district_pack_count += 1
 
             except Exception as e:
                 logger.error(f"\t\tError while processing {pack_name}: {e}", exc_info=True)
 
     logger.info(f"Build process completed in {int((datetime.now() - start_time).total_seconds() * 1000)}ms")
+    logger.info(f"Total packs built: {district_pack_count}")
 
 
 if __name__ == '__main__':

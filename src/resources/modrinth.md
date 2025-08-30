@@ -1,41 +1,43 @@
 ---
 - slug: {pack_slug}
 - name: {pack_friendly_name}
-- summary: Changes the Minecraft Tooltip to a {pack_friendly_name} - Part of the Pride Tooltips collection
+- summary: Changes the Minecraft Tooltip to {pack_friendly_name_description} – Part of the Pride Tooltips collection.
 - version_file: {pack_name}.zip
 - version_version: {pack_version}
 - icon_file: {pack_name}.png
 ---
 
 # {pack_friendly_name}
+
+![Banner showing the modified Tooltip. Cursor texture from the Minecraft Cursor Mod by fishstiz.]({upload_gallery_url})
+
 Replaces the default Minecraft Tooltip with a **{pack_friendly_name}**. 
 
 Looking for different colors/flags or styles? Check out the [Pride Tooltips Organization Page](https://modrinth.com/organization/pride-tooltips)!
 
-Looking for packs with the same color(s)/flag but with different styles? Check out the [Pride Tooltips - {color_palette_name} Collection](https://modrinth.com/collection/{color_palette_collection})!
+Looking for packs with the same color(s)/flag but with different styles? Check out the [Pride Tooltips – {color_palette_name} Collection](https://modrinth.com/collection/{color_palette_collection})!
 
-<details open>
-<summary>Color Palette</summary>
+<details open><summary>Color Palette</summary>
 
 The following colors where used to create this pack:
-
 {color_palette_formated}
 </details>
 
-<details open>
-<summary>Style</summary>
+<details open><summary>Style</summary>
 
 {style_explanation}
 </details>
 
-<details>
-<summary>Additional Information</summary>
+<details><summary>Additional Information</summary>
 
 * build_time: `{build_time}`
 * build_user: `{build_user}`
-* upload_time: `{build_time}`
-* upload_user: `{build_user}`
+* upload_time: `{upload_time}`
+* upload_user: `{upload_user}`
 </details>
+
+## Installation
+Download and place into your `resourcepacks` folder. (Only works in versions **after 1.21.1**)
 
 ## About Pride Tooltips
 
@@ -49,4 +51,6 @@ A collection of resource packs that change tooltips to be colorful and/or pride 
 [![Join our Discord](https://raw.githubusercontent.com/intergrav/devins-badges/v3/assets/compact/social/discord-plural_46h.png)](https://discord.pridecraft.gay)
 [![github-plural](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/social/github-plural_46h.png)](https://github.com/Pridecraft-Studios/pridetooltips?tab=readme-ov-file#pride-tooltips)
 
-
+### Additional Credit
+* Cursor texture, used in the banner, from the [Minecraft Cursor Mod by fishstiz](https://modrinth.com/mod/minecraft-cursor).
+* The Pridecraft team for all their support and help.
