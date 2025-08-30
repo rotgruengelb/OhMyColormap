@@ -19,7 +19,7 @@ def convert_hex_to_rgb(hex_color: str) -> Color:
     if len(hex_color) != 6:
         raise ValueError("Input should be a 6-character hex color code.")
     # noinspection PyTypeChecker
-    return tuple(int(hex_color[i:i + 2], 16) for i in (0, 2, 4))
+    return Color(int(hex_color[i:i + 2], 16) for i in (0, 2, 4))
 
 
 def generate_image_from_template(template_image: ImageFile, old_colors: list[Color], new_colors: list[Color]) -> Image:
@@ -93,9 +93,6 @@ def apply_template(template_config: dict, replacement_colors: list[Color]) -> Im
     return composed_image
 
 
-from PIL import Image
-
-
 def nine_slice_scale(image: ImageFile, left: int, top: int, right: int, bottom: int, width: int, height: int,
                      tile=False, padding=(0, 0, 0, 0)) -> Image:
     """
@@ -123,20 +120,10 @@ def nine_slice_scale(image: ImageFile, left: int, top: int, right: int, bottom: 
     cropped_width, cropped_height = cropped_image.size
 
     # Define the areas for slicing
-    slices = {"top_left": (0, 0, left, top), "top": (left, 0, cropped_width - right, top),
-        "top_right": (cropped_width - right, 0, cropped_width, top), "left": (0, top, left, cropped_height - bottom),
-        "center": (left, top, cropped_width - right, cropped_height - bottom),
-        "right": (cropped_width - right, top, cropped_width, cropped_height - bottom),
-        "bottom_left": (0, cropped_height - bottom, left, cropped_height),
-        "bottom": (left, cropped_height - bottom, cropped_width - right, cropped_height),
-        "bottom_right": (cropped_width - right, cropped_height - bottom, cropped_width, cropped_height), }
+    slices = slice_dict(bottom, cropped_height, cropped_width, left, right, top)
 
     # Calculate target areas
-    target_slices = {"top_left": (0, 0, left, top), "top": (left, 0, width - right, top),
-        "top_right": (width - right, 0, width, top), "left": (0, top, left, height - bottom),
-        "center": (left, top, width - right, height - bottom), "right": (width - right, top, width, height - bottom),
-        "bottom_left": (0, height - bottom, left, height), "bottom": (left, height - bottom, width - right, height),
-        "bottom_right": (width - right, height - bottom, width, height), }
+    target_slices = slice_dict(bottom, height, width, left, right, top)
 
     # Create the new image
     result = Image.new("RGBA", (width, height))
@@ -171,7 +158,35 @@ def nine_slice_scale(image: ImageFile, left: int, top: int, right: int, bottom: 
             region = tiled
         elif not tile or key in ["top", "bottom", "left", "right", "center"]:
             region = region.resize((target_width, target_height), Image.Resampling.NEAREST)
-
+        # noinspection PyTypeChecker
         result.paste(region, target_box[:2])
 
     return result
+
+
+def slice_dict(bottom, height, width, left, right, top):
+    return {"top_left": (0, 0, left, top), "top": (left, 0, width - right, top),
+            "top_right": (width - right, 0, width, top),
+            "left": (0, top, left, height - bottom),
+            "center": (left, top, width - right, height - bottom),
+            "right": (width - right, top, width, height - bottom),
+            "bottom_left": (0, height - bottom, left, height),
+            "bottom": (left, height - bottom, width - right, height),
+            "bottom_right": (width - right, height - bottom, width, height), }
+
+
+def make_transparent(image: Image, factor: float) -> Image:
+    """
+    Returns a copy of the given image with adjusted transparency.
+
+    Args:
+        image (Image): The input image.
+        factor (float): Transparency scaling factor.
+
+    Returns:
+        Image: New RGBA image with adjusted transparency.
+    """
+    im = image.convert("RGBA")
+    r, g, b, a = im.split()
+    a = a.point(lambda i: int(i * factor))
+    return Image.merge("RGBA", (r, g, b, a))

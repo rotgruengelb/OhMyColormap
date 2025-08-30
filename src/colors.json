@@ -1,7 +1,7 @@
 {
 	"bisexual": {
 		"version": 1,
-		"description_name": "Bisexual Pride",
+		"description_name": "Bisexual Pride Flag",
 		"styles": [
 			"3clr-full",
 			"3clr-frame",
@@ -15,7 +15,7 @@
 	},
 	"pansexual": {
 		"version": 1,
-		"description_name": "Pansexual Pride",
+		"description_name": "Pansexual Pride Flag",
 		"styles": [
 			"3clr-full",
 			"3clr-frame",
@@ -29,7 +29,7 @@
 	},
 	"polysexual": {
 		"version": 1,
-		"description_name": "Polysexual Pride",
+		"description_name": "Polysexual Pride Flag",
 		"styles": [
 			"3clr-full",
 			"3clr-frame",
@@ -43,7 +43,7 @@
 	},
 	"gay_mlm/0": {
 		"version": 1,
-		"description_name": "Gay MLM Pride",
+		"description_name": "Gay MLM Pride Flag",
 		"styles": [
 			"5clr-full",
 			"5clr-frame",
@@ -59,7 +59,7 @@
 	},
 	"gay_mlm/1": {
 		"version": 1,
-		"description_name": "Gay MLM Pride",
+		"description_name": "Gay MLM Pride Flag",
 		"styles": [
 			"7clr-full",
 			"7clr-frame",
@@ -77,7 +77,7 @@
 	},
 	"lesbian/0": {
 		"version": 1,
-		"description_name": "Lesbian Pride",
+		"description_name": "Lesbian Pride Flag",
 		"styles": [
 			"5clr-full",
 			"5clr-frame",
@@ -93,7 +93,7 @@
 	},
 	"lesbian/1": {
 		"version": 1,
-		"description_name": "Lesbian Pride",
+		"description_name": "Lesbian Pride Flag",
 		"styles": [
 			"7clr-full",
 			"7clr-frame",
@@ -111,7 +111,7 @@
 	},
 	"transgender/0": {
 		"version": 1,
-		"description_name": "Transgender Pride",
+		"description_name": "Transgender Pride Flag",
 		"styles": [
 			"5clr-full",
 			"5clr-frame",
@@ -127,7 +127,7 @@
 	},
 	"transgender/1": {
 		"version": 1,
-		"description_name": "Transgender Pride",
+		"description_name": "Transgender Pride Flag",
 		"styles": [
 			"3clr-full",
 			"3clr-frame",
@@ -141,7 +141,7 @@
 	},
 	"agender": {
 		"version": 1,
-		"description_name": "Agender Pride",
+		"description_name": "Agender Pride Flag",
 		"styles": [
 			"7clr-full",
 			"7clr-frame",
@@ -159,7 +159,7 @@
 	},
 	"bigender": {
 		"version": 1,
-		"description_name": "Bigender Pride",
+		"description_name": "Bigender Pride Flag",
 		"styles": [
 			"7clr-full",
 			"7clr-frame",
@@ -199,7 +199,7 @@
 			"#f9ab02"
 		]
 	},
-	"bright_green": {
+	"brightgreen": {
 		"version": 1,
 		"description_name": "Bright Green",
 		"styles": [
@@ -239,7 +239,7 @@
 		"version": 1,
 		"description_name": "Teal",
 		"styles": [
-			"separate-mono-bg-frame"
+			"split-mono-bg-frame"
 		],
 		"colors": [
 			"#00241c",
@@ -258,7 +258,7 @@
 			"#00ff00"
 		]
 	},
-	"soft_blue": {
+	"softblue": {
 		"version": 1,
 		"description_name": "Soft Blue",
 		"styles": [
@@ -286,7 +286,7 @@
 		"version": 1,
 		"description_name": "Purple",
 		"styles": [
-			"separate-mono-bg-frame"
+			"split-mono-bg-frame"
 		],
 		"colors": [
 			"#230934",
@@ -305,7 +305,7 @@
 			"#ffd800"
 		]
 	},
-	"dark_gray": {
+	"darkgray": {
 		"version": 1,
 		"description_name": "Dark Gray",
 		"styles": [
@@ -333,7 +333,7 @@
 		"version": 1,
 		"description_name": "Black",
 		"styles": [
-			"separate-mono-bg-frame"
+			"split-mono-bg-frame"
 		],
 		"colors": [
 			"#000000",
@@ -352,22 +352,22 @@
 			"#ffffff"
 		]
 	},
-	"pink_red_blue": {
+	"pinkred-blue": {
 		"version": 1,
 		"description_name": "Pink Red, Blue-Frame",
 		"styles": [
-			"separate-mono-bg-frame"
+			"split-mono-bg-frame"
 		],
 		"colors": [
 			"#2c0518",
 			"#21b1ff"
 		]
 	},
-	"blue_teal": {
+	"blue-teal": {
 		"version": 1,
 		"description_name": "Blue, Teal-Frame",
 		"styles": [
-			"separate-mono-bg-frame"
+			"split-mono-bg-frame"
 		],
 		"colors": [
 			"#21b1ff",
@@ -378,14 +378,14 @@
 		"version": 1,
 		"description_name": "Sand Themed",
 		"styles": [
-			"separate-mono-bg-frame"
+			"split-mono-bg-frame"
 		],
 		"colors": [
 			"#2f2e28",
 			"#eae8ca"
 		]
 	},
-		"sand/1": {
+	"sand/1": {
 		"version": 1,
 		"description_name": "Sand Themed",
 		"styles": [
@@ -397,7 +397,7 @@
 			"#eae8ca"
 		]
 	},
-	"light_pink": {
+	"lightpink": {
 		"version": 1,
 		"description_name": "Light Pink",
 		"styles": [
@@ -445,7 +445,7 @@
 			"#808080"
 		]
 	},
-	"light_gray": {
+	"lightgray": {
 		"version": 1,
 		"description_name": "Light Gray",
 		"styles": [
@@ -469,7 +469,7 @@
 			"#000080"
 		]
 	},
-	"dark_green": {
+	"darkgreen": {
 		"version": 1,
 		"description_name": "Dark Green",
 		"styles": [
@@ -481,55 +481,55 @@
 			"#006400"
 		]
 	},
-	"red_blue": {
+	"red-blue": {
 		"version": 1,
 		"description_name": "Red, Blue-Frame",
 		"styles": [
-			"separate-mono-bg-frame"
+			"split-mono-bg-frame"
 		],
 		"colors": [
 			"#d52d00",
 			"#0038a8"
 		]
 	},
-	"orange_purple": {
+	"orange-purple": {
 		"version": 1,
 		"description_name": "Orange, Purple-Frame",
 		"styles": [
-			"separate-mono-bg-frame"
+			"split-mono-bg-frame"
 		],
 		"colors": [
 			"#f9ab02",
 			"#ac2afc"
 		]
 	},
-	"white_blue": {
+	"white-blue": {
 		"version": 1,
 		"description_name": "White, Blue-Frame",
 		"styles": [
-			"separate-mono-bg-frame"
+			"split-mono-bg-frame"
 		],
 		"colors": [
 			"#303030",
 			"#0038a8"
 		]
 	},
-	"green_magenta": {
+	"green-magenta": {
 		"version": 1,
 		"description_name": "Green, Magenta-Frame",
 		"styles": [
-			"separate-mono-bg-frame"
+			"split-mono-bg-frame"
 		],
 		"colors": [
 			"#00ff00",
 			"#ff00ff"
 		]
 	},
-	"cyan_pink": {
+	"cyan-pink": {
 		"version": 1,
 		"description_name": "Cyan, Pink-Frame",
 		"styles": [
-			"separate-mono-bg-frame"
+			"split-mono-bg-frame"
 		],
 		"colors": [
 			"#003b3b",

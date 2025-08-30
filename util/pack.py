@@ -15,8 +15,9 @@ def create_pack_metadata(path: Path, description: str, pack_format: int = 37):
         pack_format (int): The format version of the pack.
     """
     mcmeta_content = {
-        "pack": {"pack_format": pack_format, "supported_formats": {"min_inclusive": pack_format, "max_inclusive": 9999},
-            "description": description}}
+        "pack": {"pack_format": pack_format,
+                 "supported_formats": {"min_inclusive": pack_format, "max_inclusive": 9999},
+                 "description": description}}
     with path.open("w", encoding="utf-8") as file:
         # noinspection PyTypeChecker
         json.dump(mcmeta_content, file, indent=2)
@@ -54,3 +55,17 @@ def generate_random_word(length: int) -> str:
         raise ValueError("Length must be a non-negative integer.")
 
     return ''.join(random_choice(ascii_lowercase) for _ in range(length))
+
+
+def modrinth_markdown_template(template_path: Path, output_path: Path, context: dict) -> None:
+    """
+    Render a markdown file template by applying string formatting with a context dictionary.
+
+    Parameters:
+        template_path (Path): Path to the template markdown file.
+        output_path (Path): Path where the rendered file should be written.
+        context (dict): Dictionary of variables to fill into the template.
+    """
+    template = template_path.read_text(encoding="utf-8")
+    rendered = template.format(**context)
+    output_path.write_text(rendered, encoding="utf-8")

@@ -11,7 +11,6 @@ A collection of resource packs that change tooltips to be colorful and/or pride 
 [![Watch me on Youtube](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/social/youtube-singular_46h.png)](https://youtube.com/rotgruengelb)
 [![See me on GitHub](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/social/github-singular_46h.png)](https://github.com/rotgruengelb)
 
-
 ### Pridecraft:
 > We are Pridecraft Studios, a collective of developers making LGBT content for Minecraft.
 We make Resource Packs and mods to add LGBT themed stuff to the game, while trying to not "overgay". The main difference of our stuff compared to other LGBT Minecraft packs is that we know how to keep the game from looking like someone vomited rainbows all over the place.
