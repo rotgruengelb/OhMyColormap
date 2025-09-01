@@ -41,7 +41,29 @@
 			"#1594F6"
 		]
 	},
-	"gay_mlm/0": {
+	"intersex/0": {
+		"version": 1,
+		"description_name": "Intersex Pride Flag",
+		"styles": [
+			"split-mono-bg-frame"
+		],
+		"colors": [
+			"#c7aa7e",
+			"#ae17f9"
+		]
+	},
+	"intersex/1": {
+		"version": 1,
+		"description_name": "Intersex Pride Flag",
+		"styles": [
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#ae17f9"
+		]
+	},
+	"gay-mlm/0": {
 		"version": 1,
 		"description_name": "Gay MLM Pride Flag",
 		"styles": [
@@ -57,7 +79,7 @@
 			"#3b1379"
 		]
 	},
-	"gay_mlm/1": {
+	"gay-mlm/1": {
 		"version": 1,
 		"description_name": "Gay MLM Pride Flag",
 		"styles": [
@@ -73,6 +95,52 @@
 			"#7bade2",
 			"#5049cc",
 			"#3d1a78"
+		]
+	},
+	"polyamory/0": {
+		"version": 1,
+		"description_name": "Polyamory Pride Flag",
+		"styles": [
+			"5clr-full",
+			"5clr-frame",
+			"5clr-frame-altbg"
+		],
+		"colors": [
+			"#189fd3",
+			"#fabe93",
+			"#ffffff",
+			"#e3355b",
+			"#5e167f"
+		]
+	},
+	"genderfluid": {
+		"version": 1,
+		"description_name": "Genderfluid Pride Flag",
+		"styles": [
+			"5clr-full",
+			"5clr-frame",
+			"5clr-frame-altbg"
+		],
+		"colors": [
+			"#ff76a3",
+			"#f5f5f5",
+			"#bf24cb",
+			"#282828",
+			"#313bbe"
+		]
+	},
+	"genderqueer": {
+		"version": 1,
+		"description_name": "Genderqueer Pride Flag",
+		"styles": [
+			"3clr-full",
+			"3clr-frame",
+			"3clr-frame-altbg"
+		],
+		"colors": [
+			"#b87fd4",
+			"#ffffff",
+			"#478253"
 		]
 	},
 	"lesbian/0": {
@@ -363,17 +431,6 @@
 			"#21b1ff"
 		]
 	},
-	"blue-teal": {
-		"version": 1,
-		"description_name": "Blue, Teal-Frame",
-		"styles": [
-			"split-mono-bg-frame"
-		],
-		"colors": [
-			"#21b1ff",
-			"#018e71"
-		]
-	},
 	"sand/0": {
 		"version": 1,
 		"description_name": "Sand Themed",
@@ -469,6 +526,198 @@
 			"#000080"
 		]
 	},
+	"raspberry": {
+		"version": 1,
+		"description_name": "Raspberry Red",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#FE6A6A"
+		]
+	},
+	"pastelrose": {
+		"version": 1,
+		"description_name": "Pastel Rose Red",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#ed91b6"
+		]
+	},
+	"babypink": {
+		"version": 1,
+		"description_name": "Baby Pink",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#ffd7fc"
+		]
+	},
+	"lilac": {
+		"version": 1,
+		"description_name": "Lilac",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#df93ff"
+		]
+	},
+	"duckegggray": {
+		"version": 1,
+		"description_name": "Duck Egg Gray",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#bee1e3"
+		]
+	},
+	"smokeblue": {
+		"version": 1,
+		"description_name": "Smoke Blue",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#c3c2e2"
+		]
+	},
+	"mintgreen": {
+		"version": 1,
+		"description_name": "Mint Green",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#a7fcdb"
+		]
+	},
+	"seagreen": {
+		"version": 1,
+		"description_name": "Sea Green",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#a6e8aa"
+		]
+	},
+	"peagreen": {
+		"version": 1,
+		"description_name": "Pea Green",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#ccfca6"
+		]
+	},
+	"lemonyellow": {
+		"version": 1,
+		"description_name": "Lemon Yellow",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#f9ff91"
+		]
+	},
+	"apricotorange": {
+		"version": 1,
+		"description_name": "Apricot Orange",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#ead376"
+		]
+	},
+	"peachorange": {
+		"version": 1,
+		"description_name": "Peach Orange",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#fcb96b"
+		]
+	},
+	"coralorange": {
+		"version": 1,
+		"description_name": "Coral Orange",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#f1956e"
+		]
+	},
+	"lightredbrown": {
+		"version": 1,
+		"description_name": "Light Red-Brown",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#997d65"
+		]
+	},
+	"neptuneblue": {
+		"version": 1,
+		"description_name": "Neptune Blue",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#2E5D9D"
+		]
+	},
+	"springteal": {
+		"version": 1,
+		"description_name": "Spring Teal",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#0EA7A5"
+		]
+	},
 	"darkgreen": {
 		"version": 1,
 		"description_name": "Dark Green",
@@ -492,17 +741,6 @@
 			"#0038a8"
 		]
 	},
-	"orange-purple": {
-		"version": 1,
-		"description_name": "Orange, Purple-Frame",
-		"styles": [
-			"split-mono-bg-frame"
-		],
-		"colors": [
-			"#f9ab02",
-			"#ac2afc"
-		]
-	},
 	"white-blue": {
 		"version": 1,
 		"description_name": "White, Blue-Frame",
@@ -512,28 +750,6 @@
 		"colors": [
 			"#303030",
 			"#0038a8"
-		]
-	},
-	"green-magenta": {
-		"version": 1,
-		"description_name": "Green, Magenta-Frame",
-		"styles": [
-			"split-mono-bg-frame"
-		],
-		"colors": [
-			"#00ff00",
-			"#ff00ff"
-		]
-	},
-	"cyan-pink": {
-		"version": 1,
-		"description_name": "Cyan, Pink-Frame",
-		"styles": [
-			"split-mono-bg-frame"
-		],
-		"colors": [
-			"#003b3b",
-			"#ffb2c1"
 		]
 	}
 }

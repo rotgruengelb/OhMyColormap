@@ -1,5 +1,4 @@
 import json
-import re
 import shutil
 from pathlib import Path
 from random import choice as random_choice
@@ -55,29 +54,3 @@ def generate_random_word(length: int) -> str:
         raise ValueError("Length must be a non-negative integer.")
 
     return ''.join(random_choice(ascii_lowercase) for _ in range(length))
-
-class SafeDict(dict):
-    def __missing__(self, key):
-        return "{" + key + "}"
-
-def modrinth_markdown_template(template_path: Path, output_path: Path, context: dict) -> None:
-    """
-    Render a markdown file template by applying string formatting with a context dictionary.
-    - Any line containing '!remove_line!' will be removed from the final output.
-    - Any Placeholders missing in `context` will be ignored and left as-is.
-
-    Parameters:
-        template_path (Path): Path to the template markdown file.
-        output_path (Path): Path where the rendered file should be written.
-        context (dict): Dictionary of variables to fill into the template.
-    """
-    template = template_path.read_text(encoding="utf-8")
-    rendered = template.format_map(SafeDict({k: v for k, v in context.items()}))
-
-    # Remove lines containing '!remove_line!'
-    cleaned = "\n".join(
-        line for line in rendered.splitlines()
-        if "!remove_line!" not in line
-    )
-
-    output_path.write_text(cleaned, encoding="utf-8")

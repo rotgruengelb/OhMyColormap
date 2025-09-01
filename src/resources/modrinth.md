@@ -1,13 +1,14 @@
 ---
-- slug: {pack_slug}
-- name: {pack_friendly_name}
-- summary: Changes the Minecraft Tooltip to {pack_friendly_name_description} – Part of the Pride Tooltips collection.
-- version_file: {pack_name}.zip
-- version_version: {pack_version}
-- icon_file: {pack_name}.png
+slug: {pack_slug}
+name: {pack_friendly_name}
+summary: Changes the Minecraft Tooltip to {pack_friendly_name_description} – Part of the Pride Tooltips collection.
+version_file: {pack_name}.zip
+version_version: {pack_version}
+icon_file: {pack_name}.png
+gallery_file: gallery_{pack_name}.png
 ---
 
-# {pack_friendly_name}
+# <center>{pack_friendly_name}</center>
 
 ![Banner showing the modified Tooltip. Cursor texture from the Minecraft Cursor Mod by fishstiz.]({upload_gallery_url})
 
@@ -32,8 +33,6 @@ The following colors where used to create this pack:
 
 * build_time: `{build_time}`
 * build_user: `{build_user}`
-* upload_time: `{upload_time}`
-* upload_user: `{upload_user}`
 </details>
 
 ## Installation

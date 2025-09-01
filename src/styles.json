@@ -180,5 +180,20 @@
             "templating_colors": ["#100010", "#0000FF"],
             "template": "monochrome/frame.png"
         }
+    },
+    "split-mono-bg-frame-bdc": {
+        "description_name": "Split Monochrome Background/Frame",
+        "explanation": "A simple split monochrome style with two colors, one for the background and one for the frame.",
+        "version": 1,
+        "expects": 2,
+        "background": {
+            "before": ["common/background_dark_compose_less.png"],
+            "templating_colors": ["#0000FF", "#100010"],
+            "template": "monochrome/background_colors_more.png"
+        },
+        "frame": {
+            "templating_colors": ["#100010", "#0000FF"],
+            "template": "monochrome/frame.png"
+        }
     }
 }

@@ -9,18 +9,15 @@ from PIL import Image
 from PIL.Image import Resampling
 
 from util.image_processing import apply_template, convert_hex_to_rgb, nine_slice_scale, make_transparent
-from util.pack import (create_pack_metadata, compress_and_remove_directory, generate_random_word,
-                       modrinth_markdown_template, )
+from util.logger import get_logger
+from util.markdown import appy_modrinth_markdown_template
+from util.pack import (create_pack_metadata, compress_and_remove_directory, generate_random_word)
 
-# Logging configuration
-logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s",
-                    handlers=[logging.StreamHandler()])
-logger = logging.getLogger(__name__)
-
+logger = get_logger(__name__)
 
 def main():
     start_time = datetime.now()
-    logger.info("Starting build process")
+    logger.info("Starting build task")
 
     # Paths and environment
     src = Path('src')
@@ -48,10 +45,12 @@ def main():
     for palette_name, palette in colors.items():
         palette_name: str = palette_name.split("/")[0]
         logger.info(f"Processing palette '{palette_name}'")
+        palette_colors = [convert_hex_to_rgb(c) for c in palette['colors']]
+        logger.debug(f"\tConverted palette colors: {palette_colors}")
 
         for style_name in palette['styles']:
             style_config = styles[style_name]
-            logger.info(f"\t\tUsing style '{style_name}'")
+            logger.info(f"\tUsing style '{style_name}'")
 
             # Generate identifiers
             pack_slug = f"tooltip_{palette_name}+{style_name}"
@@ -66,15 +65,11 @@ def main():
             else:
                 pack_friendly_name_description = f"be {pack_friendly_name_description}"
 
-            build_out_path = build / pack_name
+            build_out_path = build / pack_slug
             build_zip_collect_path = build_out_path / build_pack_dir_name
             logger.debug(f"\t\tBuild output path: {build_zip_collect_path}")
 
             try:
-                # Convert colors
-                palette_colors = [convert_hex_to_rgb(c) for c in palette['colors']]
-                logger.debug(f"\t\tConverted palette colors: {palette_colors}")
-
                 # Generate images
                 background_image = apply_template(style_config['background'], palette_colors)
                 frame_image = apply_template(style_config['frame'], palette_colors)
@@ -106,21 +101,21 @@ def main():
                 # Load overlay images
                 tooltip_text = Image.open(src / "resources" / "pack_png_tooltip_text.png")
                 tooltip_bg = Image.open(src / "resources" / "pack_png_tooltip_background.png")
-                gallery_bg = Image.open(src / "resources" / "pack_gallery_background.png")
-                gallery_overlay = Image.open(src / "resources" / "pack_gallery_overlay.png")
+                pack_gallery = Image.open(src / "resources" / "pack_gallery_background.png")
 
                 # Compose unscaled icon
                 pack_png = Image.alpha_composite(tooltip_bg, base_icon_image)
                 pack_png = Image.alpha_composite(pack_png, tooltip_text)
 
-                # Compose gallery
-                pack_gallery = Image.alpha_composite(gallery_bg, gallery_overlay)
+                # Compose unscaled gallery
                 icon_with_text = Image.alpha_composite(base_icon_image, tooltip_text)
-                pack_gallery.paste(icon_with_text, (42, 13), mask=icon_with_text)
+                pack_gallery.alpha_composite(icon_with_text, (50, 10))
 
                 # Scale up unscaled pack png
-                scaled_pack_png = (pack_png.width * 6, pack_png.height * 6)
-                scaled_pack_png = pack_png.resize(scaled_pack_png, Resampling.NEAREST)
+                scaled_pack_png = pack_png.resize((pack_png.width * 6, pack_png.height * 6), Resampling.NEAREST)
+
+                # Scale up unscaled gallery
+                pack_gallery = pack_gallery.resize((pack_gallery.width * 6, pack_gallery.height * 6), Resampling.NEAREST)
 
                 # Final pack.png (256x256)
                 pack_png = Image.new("RGBA", (256, 256), (0, 0, 0, 0))
@@ -142,9 +137,11 @@ def main():
                            "color_palette_collection": color_palette_collection,
                            "color_palette_formated": "* " + "\n* ".join(palette["colors"]),
                            "style_explanation": f"{style_config['description_name']} = {style_config['explanation']}",
-                           "build_time": datetime.now().astimezone().isoformat(timespec="seconds"), "build_user": build_user}
+                           "build_time": datetime.now().astimezone().isoformat(timespec="seconds"),
+                           "build_user": build_user}
 
-                modrinth_markdown_template(src / "resources" / "modrinth.md", build_out_path / "modrinth.md", context)
+                Path(build_out_path / "modrinth.md").write_text(
+                    appy_modrinth_markdown_template(Path(src / "resources" / "modrinth.md").read_text(encoding="utf-8"), context), encoding="utf-8")
 
                 logger.info(f"\t\tFinished building {pack_name}")
                 district_pack_count += 1
@@ -152,8 +149,8 @@ def main():
             except Exception as e:
                 logger.error(f"\t\tError while processing {pack_name}: {e}", exc_info=True)
 
-    logger.info(f"Build process completed in {int((datetime.now() - start_time).total_seconds() * 1000)}ms")
     logger.info(f"Total packs built: {district_pack_count}")
+    logger.info(f"Done: build task completed in {int((datetime.now() - start_time).total_seconds() * 1000)}ms.")
 
 
 if __name__ == '__main__':
