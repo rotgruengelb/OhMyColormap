@@ -16,7 +16,11 @@ Replaces the default Minecraft Tooltip with a **{pack_friendly_name}**.
 
 Looking for different colors/flags or styles? Check out the [Pride Tooltips Organization Page](https://modrinth.com/organization/pride-tooltips)!
 
-Looking for packs with the same color(s)/flag but with different styles? Check out the [Pride Tooltips – {color_palette_name} Collection](https://modrinth.com/collection/{color_palette_collection})!
+Looking for packs with the same color(s)/flag but with different styles? 
+Check out the [Pride Tooltips – {color_palette_name} Collection](https://modrinth.com/collection/{color_palette_collection})!
+
+Can't find a color, flag, or style you are looking for? 
+Feel free to [open an issue on GitHub](https://github.com/Pridecraft-Studios/pridetooltips/issues) or [join the Pridecraft Discord](https://discord.pridecraft.gay/) and ping `@rotgruengelb`!
 
 <details open><summary>Color Palette</summary>
 

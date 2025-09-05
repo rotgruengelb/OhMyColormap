@@ -27,6 +27,36 @@
 			"#21b1ff"
 		]
 	},
+	"modrinth": {
+		"version": 1,
+		"description_name": "Modrinth Themed",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#1bd96a"
+		]
+	},
+	"tvtestpattern": {
+		"version": 1,
+		"description_name": "TV Test Pattern Themed",
+		"styles": [
+			"7clr-full",
+			"7clr-frame",
+			"7clr-frame-altbg"
+		],
+		"colors": [
+			"#c1c1c1",
+			"#c1c109",
+			"#0bc1c1",
+			"#00c108",
+			"#c100c1",
+			"#c10605",
+			"0c00c1"
+		]
+	},
 	"polysexual": {
 		"version": 1,
 		"description_name": "Polysexual Pride Flag",
@@ -454,6 +484,51 @@
 			"#eae8ca"
 		]
 	},
+	"lavender/0": {
+		"version": 1,
+		"description_name": "Lavender",
+		"styles": [
+			"split-mono-bg-frame"
+		],
+		"colors": [
+			"#2c2c3b",
+			"#bbbbf9"
+		]
+	},
+	"lavender/1": {
+		"version": 1,
+		"description_name": "Lavender",
+		"styles": [
+			"mono-full",
+			"mono-frame",
+			"mono-frame-altbg"
+		],
+		"colors": [
+			"#bbbbf9"
+		]
+	},
+	"simple": {
+		"version": 1,
+		"description_name": "Simple",
+		"styles": [
+			"split-mono-bg-frame"
+		],
+		"colors": [
+			"#111111",
+			"#c6c6c6"
+		]
+	},
+	"gray-simple": {
+		"version": 1,
+		"description_name": "Gray Simple",
+		"styles": [
+			"split-mono-bg-frame"
+		],
+		"colors": [
+			"#111111",
+			"#a6a6a6"
+		]
+	},
 	"lightpink": {
 		"version": 1,
 		"description_name": "Light Pink",
@@ -610,6 +685,24 @@
 			"#a7fcdb"
 		]
 	},
+	"rainbow": {
+		"version": 1,
+		"description_name": "Rainbow",
+		"styles": [
+			"7clr-full",
+			"7clr-frame",
+			"7clr-frame-altbg"
+		],
+		"colors": [
+			"#fd6d72",
+			"#f0b398",
+			"#efe48d",
+			"#87ebc3",
+			"#78a1ed",
+			"#a78cdc",
+			"#dc8cd8"
+		]
+	},
 	"seagreen": {
 		"version": 1,
 		"description_name": "Sea Green",
@@ -728,28 +821,6 @@
 		],
 		"colors": [
 			"#006400"
-		]
-	},
-	"red-blue": {
-		"version": 1,
-		"description_name": "Red, Blue-Frame",
-		"styles": [
-			"split-mono-bg-frame"
-		],
-		"colors": [
-			"#d52d00",
-			"#0038a8"
-		]
-	},
-	"white-blue": {
-		"version": 1,
-		"description_name": "White, Blue-Frame",
-		"styles": [
-			"split-mono-bg-frame"
-		],
-		"colors": [
-			"#303030",
-			"#0038a8"
 		]
 	}
 }
