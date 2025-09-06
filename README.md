@@ -2,7 +2,7 @@
 
 A collection of resource packs that change tooltips to be colorful and/or pride themed.
 
-![Later Pride Tooltips Banner; Currently a placeholder image for demo purposes.](https://files.rotgruengelb.net/api/shares/pictures-from-nature/files/ef1ede25-992b-419e-9edc-18ee46087768?download=false)
+![Later Pride Tooltips Banner](./.github/assets/banner-opt.png)
 
 ## Who + Socials
 
