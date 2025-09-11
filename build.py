@@ -37,6 +37,12 @@ def main():
         with open(colors_path, 'r') as colors_file:
             colors = json.load(colors_file)
 
+        # Load metadata
+        meta_path = src / 'meta.json'
+        logger.info(f"Loading metadata from {meta_path}")
+        with open(meta_path, 'r') as meta_file:
+            meta = json.load(meta_file)
+
     except Exception as e:
         logger.error(f"Failed to load configuration files: {e}", exc_info=True)
         return
@@ -54,8 +60,8 @@ def main():
 
             # Generate identifiers
             pack_slug = f"tooltip_{palette_name}+{style_name}"
-            pack_version = f"v{palette['version']}+v{style_config['version']}"
-            pack_name = f"tooltip_{palette_name}.v{palette['version']}+{style_name}.v{style_config['version']}"
+            pack_version = f"v{palette['version']}+v{style_config['version']}+v{meta["global_version"]}"
+            pack_name = f"tooltip_{palette_name}.v{palette['version']}+{style_name}.v{style_config['version']}+v{meta["global_version"]}"
             pack_friendly_name = f"{palette['description_name']} Tooltip ({style_config['description_name']})"
             color_palette_collection = palette.get('collection_id', "!remove_line!")
             build_pack_dir_name = f"{pack_name}.{generate_random_word(8)}"

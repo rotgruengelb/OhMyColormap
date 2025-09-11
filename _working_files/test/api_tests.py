@@ -20,9 +20,9 @@ def simplify_versions(versions: List[DictKV]) -> List[str]:
 
 modrinth = ModrinthAPI(
     token=dotenv.get_key("../../.env", "MODRINTH_TOKEN"),
-    api_url="https://staging-api.modrinth.com",
+    api_url="https://api.modrinth.com",
     user_agent="Pridecraft-Studios/pridetooltips testing"
 )
 
 
-print(modrinth.get_organization_projects("pe4eTx7C"))
+print(modrinth.get_organization_projects("jIL2YTOk"))

@@ -1,3 +1,4 @@
+import json
 import sys
 import traceback
 from datetime import datetime
@@ -94,14 +95,13 @@ def do_for_each_project(org_projects, action_fn, skip_if_exists=False, skip_if_m
         project_dirs = {directories.name: directories for directories in iterate_projects()}
 
         for project_path in project_dirs:
-
+            project_path = BUILD_DIR / project_path
             project_data = handle_files_and_project_data(project_path)
             if not project_data:
                 continue
 
             slug = project_data["slug"]
             project_exists = slug in org_projects
-            # skip logic
             if skip_if_exists and project_exists:
                 logger.info(f"[{project_path.name}] Project already exists, skipping.")
                 continue
@@ -128,7 +128,7 @@ def check(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
         total += 1
         project_data = load_project_data(project_dir)
         slug = project_data.get("slug", "???")
-        logger.info(f"[{project_dir.name}] Checking project ...")
+        logger.info(f"[{project_dir.name}] Checking project...")
         if not project_data:
             logger.debug(f"[{project_dir.name}] Skipping due to missing or invalid modrinth.md")
             continue
@@ -164,11 +164,11 @@ def create(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
                     NewProject(
                         slug=slug,
                         title=project_data["name"],
-                        description="... ...",
+                        description="......",
                         categories=[],
                         additional_categories=[],
                         project_type=ProjectType.RESOURCEPACK,
-                        body="... ...",
+                        body="......",
                         client_side=SideSupport.REQUIRED,
                         server_side=SideSupport.UNSUPPORTED,
                         organization_id=modrinth_org_id,
@@ -184,7 +184,7 @@ def create(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
     to_create = do_for_each_project(
         org_projects, make_create_function,
         skip_if_exists=True,
-        log_queue_msg="[{{dir}}]\\t Queued for creation ..."
+        log_queue_msg="[{{dir}}]\\t Queued for creation..."
     )
 
     if to_create:
@@ -202,33 +202,31 @@ def create(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
 
     log_task_completion("create", start_time)
 
-
-def update(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
-    if not verify_build_dir():
-        return
-
-    start_time = run_task("update")
+def update_gallery(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
+    start_time = run_task("update_gallery")
     org_projects = fetch_org_projects(modrinth_api, modrinth_org_id)
 
-    def make_update_function(project_dir, project_data, project):
+    def make_update_gallery(project_dir, project_data, project):
         slug = project_data["slug"]
         dir_name = project_dir.name
+
         def _update():
-            logger.info(f"[{dir_name}] Updating project ...")
+            logger.info(f"[{dir_name}] Updating gallery...")
             try:
                 if not project:
-                    logger.warning(f"[{dir_name}] Project does not exist or had errors, continuing.")
-                    return {"slug": slug, "dir_name": dir_name, "success": False, "ModrinthAPIError": "Does not exist on Modrinth"}
-                logger.info(f"[{dir_name}] Found project, updating details and gallery ...")
+                    logger.warning(f"[{dir_name}] Project does not exist, skipping gallery update.")
+                    return {"slug": slug, "dir_name": dir_name, "success": False, "error": "Missing project"}
+
                 gallery_file = project_dir / project_data["gallery_file"]
                 if project.get("gallery"):
-                    logger.info(f"[{dir_name}] Deleting old gallery image ...")
+                    logger.info(f"[{dir_name}] Deleting old gallery image...")
                     try:
                         modrinth_api.delete_gallery_image(project_data["gallery_file"], project["gallery"][0]["url"])
                     except ModrinthAPIError as img_ex:
                         logger.warning(f"[{dir_name}] Could not delete old gallery image: {img_ex}")
                         logger.debug(traceback.format_exc())
-                logger.info(f"[{dir_name}] Adding new gallery image ...")
+
+                logger.info(f"[{dir_name}] Adding new gallery image...")
                 modrinth_api.add_gallery_image(
                     id_or_slug=slug,
                     image=GalleryImage(
@@ -239,13 +237,48 @@ def update(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
                         description="Banner showing the modified Tooltip. Cursor texture from the Minecraft Cursor Mod by fishstiz."
                     )
                 )
+
+                logger.info(f"[{dir_name}] Gallery updated successfully.")
+                return {"slug": slug, "dir_name": dir_name, "success": True}
+            except ModrinthAPIError as e:
+                logger.error(f"[{dir_name}] Gallery update failed: {e}", exc_info=True)
+                return {"slug": slug, "dir_name": dir_name, "success": False, "error": e}
+
+        return _update
+
+    to_update = do_for_each_project(org_projects, make_update_gallery, skip_if_missing=True,
+                                    log_queue_msg="[{dir}] Queued for gallery update...")
+    if to_update:
+        try:
+            modrinth_api.parallel_requests(to_update)
+        except ModrinthAPIError:
+            logger.error("Some gallery updates failed.", exc_info=True)
+
+    log_task_completion("update_gallery", start_time)
+
+
+def update_data(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
+    start_time = run_task("update_data")
+    org_projects = fetch_org_projects(modrinth_api, modrinth_org_id)
+
+    def make_update_data(project_dir, project_data, project):
+        slug = project_data["slug"]
+        dir_name = project_dir.name
+
+        def _update():
+            logger.info(f"[{dir_name}] Updating metadata...")
+            try:
+                if not project:
+                    logger.warning(f"[{dir_name}] Project does not exist, skipping metadata update.")
+                    return {"slug": slug, "dir_name": dir_name, "success": False, "error": "Missing project"}
+
                 refreshed_project = modrinth_api.get_project(slug)
-                gallery_url = refreshed_project["gallery"][0]["url"] if refreshed_project.get("gallery") and refreshed_project["gallery"] else None
+                gallery_url = refreshed_project["gallery"][0]["url"] if refreshed_project.get("gallery") else None
                 new_body = appy_modrinth_markdown_template(
                     project_data["body"],
                     context={"upload_gallery_url": gallery_url}
                 )
-                logger.info(f"[{dir_name}] Updating project metadata ...")
+
                 modrinth_api.modify_project(
                     refreshed_project["id"],
                     ProjectUpdate(
@@ -260,37 +293,101 @@ def update(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
                         license_id="CC-BY-SA-4.0"
                     )
                 )
-                logger.info(f"[{dir_name}] Updated successfully.")
+                logger.info(f"[{dir_name}] Metadata updated successfully.")
                 return {"slug": slug, "dir_name": dir_name, "success": True}
             except ModrinthAPIError as e:
-                logger.error(f"[{dir_name}] Unexpected error updating: {e}", exc_info=True)
-                return {"slug": slug, "dir_name": dir_name, "success": False, "ModrinthAPIError": e}
+                logger.error(f"[{dir_name}] Metadata update failed: {e}", exc_info=True)
+                return {"slug": slug, "dir_name": dir_name, "success": False, "error": e}
+
         return _update
 
-    to_update = do_for_each_project(
-        org_projects, make_update_function,
-        skip_if_missing=True,
-        log_queue_msg="[{dir}] Queued for update ..."
-    )
-
+    to_update = do_for_each_project(org_projects, make_update_data, skip_if_missing=True,
+                                    log_queue_msg="[{dir}] Queued for metadata update...")
     if to_update:
         try:
-            results = modrinth_api.parallel_requests(to_update)
-            for result in results:
-                slug = result['slug']
-                dir_name = result.get("dir_name", "???")
-                if result.get("success"):
-                    logger.info(f"[{dir_name}] Updated successfully.")
-                else:
-                    logger.error(f"[{dir_name}] Failed to update: {result.get('ModrinthAPIError')}", exc_info=True)
-        except ModrinthAPIError as e:
-            logger.error("Failed to update some projects.", exc_info=True)
+            modrinth_api.parallel_requests(to_update)
+        except ModrinthAPIError:
+            logger.error("Some metadata updates failed.", exc_info=True)
 
-    log_task_completion("update", start_time)
+    log_task_completion("update_data", start_time)
+
+
+def update_icon(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
+    start_time = run_task("update_icon")
+    org_projects = fetch_org_projects(modrinth_api, modrinth_org_id)
+
+    def make_update_icon(project_dir, project_data, project):
+        slug = project_data["slug"]
+        dir_name = project_dir.name
+
+        def _update():
+            logger.info(f"[{dir_name}] Updating project icon...")
+            try:
+                if not project:
+                    logger.warning(f"[{dir_name}] Project does not exist, skipping icon update.")
+                    return {"slug": slug, "dir_name": dir_name, "success": False, "error": "Missing project"}
+
+                refreshed_project = modrinth_api.get_project(slug)
+                icon_file = project_dir / project_data["icon_file"]
+
+                modrinth_api.change_project_icon(
+                    refreshed_project["id"],
+                    icon_path=icon_file,
+                    ext=icon_file.suffix.lstrip(".")
+                )
+
+                logger.info(f"[{dir_name}] Icon updated successfully.")
+                return {"slug": slug, "dir_name": dir_name, "success": True}
+            except ModrinthAPIError as e:
+                logger.error(f"[{dir_name}] Icon update failed: {e}", exc_info=True)
+                return {"slug": slug, "dir_name": dir_name, "success": False, "error": e}
+
+        return _update
+
+    to_update = do_for_each_project(org_projects, make_update_icon, skip_if_missing=True,
+                                    log_queue_msg="[{dir}] Queued for icon update...")
+    if to_update:
+        try:
+            modrinth_api.parallel_requests(to_update)
+        except ModrinthAPIError:
+            logger.error("Some icon updates failed.", exc_info=True)
+
+    log_task_completion("update_icon", start_time)
+
+
+def update(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
+    if not verify_build_dir():
+        return
+
+    match sys.argv[2] if len(sys.argv) > 2 else input("Enter update-subtask: "):
+        case "all":
+            update_icon(modrinth_api, modrinth_org_id)
+            update_gallery(modrinth_api, modrinth_org_id)
+            update_data(modrinth_api, modrinth_org_id)
+        case "icon":
+            update_icon(modrinth_api, modrinth_org_id)
+        case "gallery":
+            update_gallery(modrinth_api, modrinth_org_id)
+        case "data":
+            update_data(modrinth_api, modrinth_org_id)
+        case _:
+            logger.error("Unknown update-subtask")
 
 
 def publish(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
     if not verify_build_dir():
+        return
+
+    src = Path('src')
+    try:
+        # Load metadata
+        meta_path = src / 'meta.json'
+        logger.info(f"Loading metadata from {meta_path}")
+        with open(meta_path, 'r') as meta_file:
+            meta = json.load(meta_file)
+
+    except Exception as e:
+        logger.error(f"Failed to load configuration files: {e}", exc_info=True)
         return
 
     start_time = run_task("publish")
@@ -302,9 +399,16 @@ def publish(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
         dir_name = project_dir.name
         def _wrapped():
             try:
+                version_name = f"{str(project_data['name']).replace(meta["redundant_removable_info"], "")} {project_data['version_version']}"
+                if len(version_name) > 64:
+                    version_name = version_name.replace("Frame-only", "Fr...")
+                    version_name = version_name.replace("Alt-BG", "A...")
+                    version_name = version_name.replace("Background/Frame", "B.../Fr...")
+                    version_name = version_name.replace("Monochrome", "Mono...")
+
                 result = modrinth_api.create_version(
                     NewVersion(
-                        name=f"{project_data['name']} {project_data['version_version']}",
+                        name=version_name,
                         version_number=project_data["version_version"],
                         project_id=project["id"],
                         loaders=["minecraft"],
@@ -323,7 +427,7 @@ def publish(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
     to_publish = do_for_each_project(
         org_projects, make_publish_fn,
         skip_if_missing=True,
-        log_queue_msg="[{dir}] Queued for publish ..."
+        log_queue_msg="[{dir}] Queued for publish..."
     )
 
     if to_publish:
@@ -361,7 +465,7 @@ def submit(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
                     logger.info(f"[{project_name}] Project already in processing state, skipping.")
                     return {"slug": project_name, "dir_name": project_name, "success": True}
 
-                logger.info(f"[{project_name}] Submitting project ...")
+                logger.info(f"[{project_name}] Submitting project...")
                 modrinth_api.modify_project(
                     project["id"],
                     ProjectUpdate(
@@ -378,7 +482,7 @@ def submit(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
     to_update = do_for_each_project(
         org_projects, make_submit_function,
         skip_if_missing=True,
-        log_queue_msg="[{dir}] Queued for submit ...",
+        log_queue_msg="[{dir}] Queued for submit...",
         all_org_mode=True
     )
 
@@ -402,6 +506,95 @@ def submit(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
 def get_game_versions(modrinth_api: ModrinthAPI) -> List[str]:
     cut_versions = modrinth_api.get_game_versions_until("24w36a")
     return [version["version"] for version in cut_versions]
+
+
+def workspace_1(modrinth_api, modrinth_org_id) -> None:
+    # delete all project folders of projects that have a status other than "draft"
+    if not verify_build_dir():
+        return
+    start_time = run_task("workspace")
+    org_projects = fetch_org_projects(modrinth_api, modrinth_org_id)
+    deleted_count = 0
+    for project_dir in iterate_projects():
+        project_data = load_project_data(project_dir)
+        if not project_data:
+            logger.debug(f"[{project_dir.name}] No valid project data")
+            continue
+        slug = project_data["slug"]
+        project = org_projects.get(slug)
+        if not project:
+            logger.warning(f"[{project_dir.name}] Project not found on Modrinth, skipping.")
+            continue
+        if project.get("status") != "draft":
+            try:
+                for item in project_dir.iterdir():
+                    if item.is_file():
+                        item.unlink()
+                    elif item.is_dir():
+                        for subitem in item.rglob('*'):
+                            if subitem.is_file():
+                                subitem.unlink()
+                        item.rmdir()
+                project_dir.rmdir()
+                deleted_count += 1
+                logger.info(f"[{project_dir.name}] Deleted project folder.")
+            except Exception as e:
+                logger.error(f"[{project_dir.name}] Failed to delete project folder: {e}", exc_info=True)
+
+    logger.info(f"Deleted {deleted_count} project folder(s).")
+    log_task_completion("workspace", start_time)
+
+
+def workspace_2(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
+    # delete all project folders that already have their current version published on Modrinth
+    if not verify_build_dir():
+        return
+    start_time = run_task("workspace_2")
+    org_projects = fetch_org_projects(modrinth_api, modrinth_org_id)
+    deleted_count = 0
+
+    for project_dir in iterate_projects():
+        project_data = load_project_data(project_dir)
+        if not project_data:
+            logger.debug(f"[{project_dir.name}] No valid project data")
+            continue
+
+        slug = project_data["slug"]
+        current_version = project_data.get("version_version")
+        if not current_version:
+            logger.warning(f"[{project_dir.name}] Missing 'version_version' in project data, skipping.")
+            continue
+
+        project = org_projects.get(slug)
+        if not project:
+            logger.warning(f"[{project_dir.name}] Project not found on Modrinth, skipping.")
+            continue
+
+        try:
+            versions = modrinth_api.get_project_versions(slug)
+            published_versions = [v["version_number"] for v in versions]
+
+            if current_version in published_versions:
+                for item in project_dir.iterdir():
+                    if item.is_file():
+                        item.unlink()
+                    elif item.is_dir():
+                        for subitem in item.rglob('*'):
+                            if subitem.is_file():
+                                subitem.unlink()
+                        item.rmdir()
+                project_dir.rmdir()
+                deleted_count += 1
+                logger.info(f"[{project_dir.name}] Deleted project folder (version {current_version} already published).")
+            else:
+                logger.info(f"[{project_dir.name}] Current version {current_version} not published yet, keeping folder.")
+
+        except ModrinthAPIError as e:
+            logger.error(f"[{project_dir.name}] Failed to check versions: {e}", exc_info=True)
+
+    logger.info(f"Deleted {deleted_count} project folder(s).")
+    log_task_completion("workspace_2", start_time)
+
 
 
 def main() -> None:
@@ -430,6 +623,10 @@ def main() -> None:
             publish(modrinth_api, modrinth_org_id)
         case "submit":
             submit(modrinth_api, modrinth_org_id)
+        case "workspace_1":
+            workspace_1(modrinth_api, modrinth_org_id)
+        case "workspace_2":
+            workspace_2(modrinth_api, modrinth_org_id)
         case _:
             logger.error("Unknown subtask")
 

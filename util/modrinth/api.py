@@ -116,6 +116,9 @@ class ModrinthAPI:
     def get_project(self, id_or_slug: str) -> DictKV:
         return self._request("GET", f"/project/{id_or_slug}")
 
+    def get_version(self, version_id: str) -> DictKV:
+        return self._request("GET", f"/version/{version_id}")
+
     def get_organization_projects(self, organization_id: str) -> DictKV:
         return self._request("GET", f"/organization/{organization_id}/projects", 3)
 
@@ -176,6 +179,12 @@ class ModrinthAPI:
             params={"url": image_url}
         )
 
+    def delete_version(self, version_id: str) -> None:
+        self._request(
+            "DELETE",
+            f"/version/{version_id}"
+        )
+
     def get_game_versions(self) -> List[DictKV]:
         return self._request("GET", "/tag/game_version")
 
@@ -214,3 +223,6 @@ class ModrinthAPI:
                 raise r
 
         return results
+
+    def get_project_versions(self, id_or_slug):
+        return self._request("GET", f"/project/{id_or_slug}/version")

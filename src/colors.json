@@ -72,25 +72,25 @@
 		]
 	},
 	"intersex/0": {
-		"version": 1,
+		"version": 2,
 		"description_name": "Intersex Pride Flag",
 		"styles": [
 			"split-mono-bg-frame"
 		],
 		"colors": [
-			"#c7aa7e",
-			"#ae17f9"
+			"#ffd80b",
+			"#7900aa"
 		]
 	},
 	"intersex/1": {
-		"version": 1,
+		"version": 2,
 		"description_name": "Intersex Pride Flag",
 		"styles": [
 			"mono-frame",
 			"mono-frame-altbg"
 		],
 		"colors": [
-			"#ae17f9"
+			"#7900aa"
 		]
 	},
 	"gay-mlm/0": {
@@ -107,6 +107,116 @@
 			"#ffffff",
 			"#7cafe3",
 			"#3b1379"
+		]
+	},
+	"asexual": {
+		"version": 1,
+		"description_name": "Asexual Pride Flag",
+		"styles": [
+			"4clr-full",
+			"4clr-frame",
+			"4clr-frame-altbg"
+		],
+		"colors": [
+			"#232323",
+			"#a4a5a4",
+			"#ffffff",
+			"#810081"
+		]
+	},
+	"asexual-spectrum": {
+		"version": 1,
+		"description_name": "Asexual Spectrum Pride Flag",
+		"styles": [
+			"4clr-full",
+			"4clr-frame",
+			"4clr-frame-altbg"
+		],
+		"colors": [
+			"#151847",
+			"#7657ae",
+			"#da92b4",
+			"#ffeced"
+		]
+	},
+	"aromantic": {
+		"version": 1,
+		"description_name": "Aromantic Pride Flag",
+		"styles": [
+			"5clr-full",
+			"5clr-frame",
+			"5clr-frame-altbg"
+		],
+		"colors": [
+			"#3da542",
+			"#a7d379",
+			"#ffffff",
+			"#a9a9a9",
+			"#232323"
+		]
+	},
+	"aromantic-spectrum": {
+		"version": 1,
+		"description_name": "Aromantic Spectrum Pride Flag",
+		"styles": [
+			"5clr-full",
+			"5clr-frame",
+			"5clr-frame-altbg"
+		],
+		"colors": [
+			"#3f9f52",
+			"#97cf7c",
+			"#f2fccf",
+			"#186264",
+			"#052127"
+		]
+	},
+	"aroace": {
+		"version": 1,
+		"description_name": "Aromantic Asexual Pride Flag",
+		"styles": [
+			"5clr-full",
+			"5clr-frame",
+			"5clr-frame-altbg"
+		],
+		"colors": [
+			"#e28c08",
+			"#eccd0a",
+			"#ffffff",
+			"#63aedc",
+			"#203856"
+		]
+	},
+	"fiaspec": {
+		"version": 1,
+		"description_name": "Fiaspec Pride Flag",
+		"styles": [
+			"5clr-full",
+			"5clr-frame",
+			"5clr-frame-altbg"
+		],
+		"colors": [
+			"#5f2263",
+			"#b69ed0",
+			"#ede0df",
+			"#e3c5c9",
+			"#c771a3"
+		]
+	},
+	"miaspec": {
+		"version": 1,
+		"description_name": "Miaspec Pride Flag",
+		"styles": [
+			"5clr-full",
+			"5clr-frame",
+			"5clr-frame-altbg"
+		],
+		"colors": [
+			"#2b3b7f",
+			"#c593e5",
+			"#fdfaec",
+			"#8ceaf2",
+			"#6fafe1"
 		]
 	},
 	"gay-mlm/1": {
