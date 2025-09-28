@@ -1,7 +1,7 @@
 {
 	"3clr-full": {
 		"description_name": "Tricolor",
-		"explanation": "A simple tricolor flag with three colors.",
+		"explanation": "A simple tricolor flag with three colors",
 		"version": 1,
 		"expects": 3,
 		"background": {
@@ -27,7 +27,7 @@
 	},
 	"3clr-frame": {
 		"description_name": "Frame-only Tricolor",
-		"explanation": "A simple tricolor flag with three colors. This style only applies the colors to the frame, leaving the background black.",
+		"explanation": "A simple tricolor flag with three colors. This style only applies the colors to the frame, leaving the background black",
 		"version": 1,
 		"expects": 3,
 		"background": {
@@ -46,7 +46,7 @@
 	},
 	"3clr-frame-altbg": {
 		"description_name": "Frame-only Tricolor",
-		"explanation": "A simple tricolor flag with three colors. This style only applies the colors to the frame, leaving the background as the default Minecraft texture.",
+		"explanation": "A simple tricolor flag with three colors. This style only applies the colors to the frame, leaving the background as the default Minecraft texture",
 		"version": 1,
 		"expects": 3,
 		"background": {
@@ -65,7 +65,7 @@
 	},
 	"4clr-full": {
 		"description_name": "4-Color",
-		"explanation": "A simple 4-color flag with four colors.",
+		"explanation": "A simple 4-color flag with four colors",
 		"version": 1,
 		"expects": 4,
 		"background": {
@@ -93,7 +93,7 @@
 	},
 	"4clr-frame": {
 		"description_name": "Frame-only 4-Color",
-		"explanation": "A simple 4-color flag with four colors. This style only applies the colors to the frame, leaving the background black.",
+		"explanation": "A simple 4-color flag with four colors. This style only applies the colors to the frame, leaving the background black",
 		"version": 1,
 		"expects": 4,
 		"background": {
@@ -113,7 +113,7 @@
 	},
 	"4clr-frame-altbg": {
 		"description_name": "Frame-only Alt-BG 4-Color",
-		"explanation": "A simple 4-color flag with four colors. This style only applies the colors to the frame, leaving the background as the default Minecraft texture.",
+		"explanation": "A simple 4-color flag with four colors. This style only applies the colors to the frame, leaving the background as the default Minecraft texture",
 		"version": 1,
 		"expects": 4,
 		"background": {
@@ -133,7 +133,7 @@
 	},
 	"5clr-full": {
 		"description_name": "5-Color",
-		"explanation": "A simple 5-color flag with five colors.",
+		"explanation": "A simple 5-color flag with five colors",
 		"version": 1,
 		"expects": 5,
 		"background": {
@@ -163,7 +163,7 @@
 	},
 	"5clr-frame": {
 		"description_name": "Frame-only 5-Color",
-		"explanation": "A simple 5-color flag with five colors. This style only applies the colors to the frame, leaving the background black.",
+		"explanation": "A simple 5-color flag with five colors. This style only applies the colors to the frame, leaving the background black",
 		"version": 1,
 		"expects": 5,
 		"background": {
@@ -184,7 +184,7 @@
 	},
 	"5clr-frame-altbg": {
 		"description_name": "Frame-only Alt-BG 5-Color",
-		"explanation": "A simple 5-color flag with five colors. This style only applies the colors to the frame, leaving the background as the default Minecraft texture.",
+		"explanation": "A simple 5-color flag with five colors. This style only applies the colors to the frame, leaving the background as the default Minecraft texture",
 		"version": 1,
 		"expects": 5,
 		"background": {
@@ -205,7 +205,7 @@
 	},
 	"7clr-full": {
 		"description_name": "7-Color",
-		"explanation": "A simple 7-color flag with seven colors.",
+		"explanation": "A simple 7-color flag with seven colors",
 		"version": 1,
 		"expects": 5,
 		"background": {
@@ -239,7 +239,7 @@
 	},
 	"7clr-frame": {
 		"description_name": "Frame-only 7-Color",
-		"explanation": "A simple 7-color flag with seven colors. This style only applies the colors to the frame, leaving the background black.",
+		"explanation": "A simple 7-color flag with seven colors. This style only applies the colors to the frame, leaving the background black",
 		"version": 1,
 		"expects": 5,
 		"background": {
@@ -262,7 +262,7 @@
 	},
 	"7clr-frame-altbg": {
 		"description_name": "Frame-only Alt-BG 7-Color",
-		"explanation": "A simple 7-color flag with seven colors. This style only applies the colors to the frame, leaving the background as the default Minecraft texture.",
+		"explanation": "A simple 7-color flag with seven colors. This style only applies the colors to the frame, leaving the background as the default Minecraft texture",
 		"version": 1,
 		"expects": 5,
 		"background": {
@@ -285,7 +285,7 @@
 	},
 	"mono-full": {
 		"description_name": "Monochrome",
-		"explanation": "A simple monochrome style with one color.",
+		"explanation": "A simple monochrome style with one color",
 		"version": 1,
 		"expects": 1,
 		"background": {
@@ -303,11 +303,12 @@
 			],
 			"template": "monochrome/frame.png"
 		},
-		"merge_background_into_frame": true
+		"merge_background_into_frame": true,
+		"generate_turned_variant": false
 	},
 	"mono-frame": {
 		"description_name": "Frame-only Monochrome",
-		"explanation": "A simple monochrome style with one color. This style only applies the color to the frame, leaving the background black.",
+		"explanation": "A simple monochrome style with one color. This style only applies the color to the frame, leaving the background black",
 		"version": 1,
 		"expects": 1,
 		"background": {
@@ -320,11 +321,12 @@
 				"#0000FF"
 			],
 			"template": "monochrome/frame.png"
-		}
+		},
+		"generate_turned_variant": false
 	},
 	"mono-frame-altbg": {
 		"description_name": "Frame-only Alt-BG Monochrome",
-		"explanation": "A simple monochrome style with one color. This style only applies the color to the frame, leaving the background as the default Minecraft texture.",
+		"explanation": "A simple monochrome style with one color. This style only applies the color to the frame, leaving the background as the default Minecraft texture",
 		"version": 1,
 		"expects": 1,
 		"background": {
@@ -337,11 +339,12 @@
 				"#0000FF"
 			],
 			"template": "monochrome/frame.png"
-		}
+		},
+		"generate_turned_variant": false
 	},
 	"split-mono-bg-frame": {
 		"description_name": "Split Monochrome Background/Frame",
-		"explanation": "A simple split monochrome style with two colors, one for the background and one for the frame.",
+		"explanation": "A simple split monochrome style with two colors, one for the background and one for the frame",
 		"version": 1,
 		"expects": 2,
 		"background": {
@@ -357,11 +360,12 @@
 				"#0000FF"
 			],
 			"template": "monochrome/frame.png"
-		}
+		},
+		"generate_turned_variant": false
 	},
 	"split-mono-bg-frame-bdc": {
 		"description_name": "Split Monochrome Background/Frame",
-		"explanation": "A simple split monochrome style with two colors, one for the background and one for the frame.",
+		"explanation": "A simple split monochrome style with two colors, one for the background and one for the frame",
 		"version": 1,
 		"expects": 2,
 		"background": {
@@ -380,6 +384,7 @@
 				"#0000FF"
 			],
 			"template": "monochrome/frame.png"
-		}
+		},
+		"generate_turned_variant": false
 	}
 }

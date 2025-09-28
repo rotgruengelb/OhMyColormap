@@ -312,6 +312,54 @@ def update_data(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
     log_task_completion("update_data", start_time)
 
 
+def update_body(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
+    start_time = run_task("update_body")
+    org_projects = fetch_org_projects(modrinth_api, modrinth_org_id)
+
+    def make_update_data(project_dir, project_data, project):
+        slug = project_data["slug"]
+        dir_name = project_dir.name
+
+        def _update():
+            logger.info(f"[{dir_name}] Updating body...")
+            try:
+                if not project:
+                    logger.warning(f"[{dir_name}] Project does not exist, skipping body update.")
+                    return {"slug": slug, "dir_name": dir_name, "success": False, "error": "Missing project"}
+
+                refreshed_project = modrinth_api.get_project(slug)
+                gallery_url  = refreshed_project["gallery"][0]["url"] if refreshed_project.get("gallery") else None
+
+                new_body = appy_modrinth_markdown_template(
+                    project_data["body"],
+                    context={"upload_gallery_url": gallery_url}
+                )
+
+                modrinth_api.modify_project(
+                    refreshed_project["id"],
+                    ProjectUpdate(
+                        body=new_body,
+                    )
+                )
+                logger.info(f"[{dir_name}] Body updated successfully.")
+                return {"slug": slug, "dir_name": dir_name, "success": True}
+            except ModrinthAPIError as e:
+                logger.error(f"[{dir_name}] Body update failed: {e}", exc_info=True)
+                return {"slug": slug, "dir_name": dir_name, "success": False, "error": e}
+
+        return _update
+
+    to_update = do_for_each_project(org_projects, make_update_data, skip_if_missing=True,
+                                    log_queue_msg="[{dir}] Queued for body update...")
+    if to_update:
+        try:
+            modrinth_api.parallel_requests(to_update)
+        except ModrinthAPIError:
+            logger.error("Some body updates failed.", exc_info=True)
+
+    log_task_completion("update_body", start_time)
+
+
 def update_icon(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
     start_time = run_task("update_icon")
     org_projects = fetch_org_projects(modrinth_api, modrinth_org_id)
@@ -370,6 +418,8 @@ def update(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
             update_gallery(modrinth_api, modrinth_org_id)
         case "data":
             update_data(modrinth_api, modrinth_org_id)
+        case "body":
+            update_body(modrinth_api, modrinth_org_id)
         case _:
             logger.error("Unknown update-subtask")
 

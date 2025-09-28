@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from PIL import Image, ImageFile
+from PIL.Image import Transpose
 
 Color = tuple[int, int, int]
 
@@ -54,13 +55,14 @@ def generate_image_from_template(template_image: ImageFile, old_colors: list[Col
     return new_image
 
 
-def apply_template(template_config: dict, replacement_colors: list[Color]) -> Image:
+def apply_template(template_config: dict, replacement_colors: list[Color], transpose: Transpose = None) -> Image:
     """
     Apply templating on an image with layers and color replacements.
 
     Parameters:
         template_config (dict): Configuration for templating.
         replacement_colors (ColorList): New colors for templating.
+        transpose (Transpose): The transpose to apply. Default: None
 
     Returns:
         Image: The templated image.
@@ -80,7 +82,6 @@ def apply_template(template_config: dict, replacement_colors: list[Color]) -> Im
 
     # Apply color replacements and compose with the template
     if 'template' in template_config:
-        # noinspection PyUnboundLocalVariable
         replaced_image = generate_image_from_template(base_template, target_colors, replacement_colors)
         composed_image = Image.alpha_composite(composed_image, replaced_image)
 
@@ -89,6 +90,10 @@ def apply_template(template_config: dict, replacement_colors: list[Color]) -> Im
         for after_layer in template_config['after']:
             layer_image = Image.open(Path('src') / after_layer).convert("RGBA")
             composed_image = Image.alpha_composite(composed_image, layer_image)
+
+    # transpose if requested
+    if transpose is not None:
+        composed_image = composed_image.transpose(transpose)
 
     return composed_image
 
