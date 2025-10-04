@@ -1,0 +1,4 @@
+icons:
+    Angle: MC1
+    Res: 512 x 512
+    Zoom: 213

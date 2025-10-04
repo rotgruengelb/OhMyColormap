@@ -1,0 +1,167 @@
+{
+	"badlands": {
+		"color": "#9E814D",
+		"biomes": [
+			"Badlands",
+			"Eroded Badlands",
+			"Wooded Badlands"
+		]
+	},
+	"cherry_grove": {
+		"color": "#B6DB61",
+		"biomes": [
+			"Cherry Grove"
+		]
+	},
+	"desert-savanna": {
+		"color": "#AEA42A",
+		"biomes": [
+			"Desert",
+			"Savanna",
+			"Savanna Plateau",
+			"Windswept Savanna",
+			"Nether Wastes",
+			"Soul Sand Valley",
+			"Crimson Forest",
+			"Warped Forest",
+			"Basalt Deltas"
+		]
+	},
+	"stony_peaks": {
+		"color": "#82AC1E",
+		"biomes": [
+			"Stony Peaks"
+		]
+	},
+	"jungle": {
+		"color": "#30BB0B",
+		"biomes": [
+			"Jungle",
+			"Bamboo Jungle"
+		]
+	},
+	"sparse_jungle": {
+		"color": "#3EB80F",
+		"biomes": [
+			"Sparse Jungle"
+		]
+	},
+	"mushroom_fields": {
+		"color": "#2BBB0F",
+		"biomes": [
+			"Mushroom Fields"
+		]
+	},
+	"swamp": {
+		"color": "#6A7039",
+		"biomes": [
+			"Swamp"
+		]
+	},
+	"mangrove_swamp": {
+		"color": "#8DB127",
+		"biomes": [
+			"Mangrove Swamp"
+		]
+	},
+	"plains": {
+		"color": "#77AB2F",
+		"biomes": [
+			"Plains",
+			"Sunflower Plains",
+			"Beach",
+			"Dripstone Caves",
+			"Deep Dark"
+		]
+	},
+	"forest": {
+		"color": "#59AE30",
+		"biomes": [
+			"Forest",
+			"Flower Forest",
+			"Dark Forest"
+		]
+	},
+	"pale_garden": {
+		"color": "#878D76",
+		"biomes": [
+			"Pale Garden"
+		]
+	},
+	"birch_forest": {
+		"color": "#6BA941",
+		"biomes": [
+			"Birch Forest",
+			"Old Growth Birch Forest"
+		]
+	},
+	"ocean-river-lush_caves": {
+		"color": "#71A74D",
+		"biomes": [
+			"Ocean",
+			"Deep Ocean",
+			"Warm Ocean",
+			"Lukewarm Ocean",
+			"Deep Lukewarm Ocean",
+			"Cold Ocean",
+			"Deep Cold Ocean",
+			"Deep Frozen Ocean",
+			"River",
+			"Lush Caves",
+			"The End",
+			"Small End Islands",
+			"End Barrens",
+			"End Midlands",
+			"End Highlands",
+			"The Void"
+		]
+	},
+	"meadow": {
+		"color": "#63A948",
+		"biomes": [
+			"Meadow"
+		]
+	},
+	"old_growth_pine_taiga": {
+		"color": "#68A55F",
+		"biomes": [
+			"Old Growth Pine Taiga"
+		]
+	},
+	"taiga": {
+		"color": "#68A464",
+		"biomes": [
+			"Taiga",
+			"Old Growth Spruce Taiga"
+		]
+	},
+	"windswept_hills": {
+		"color": "#6DA36B",
+		"biomes": [
+			"Windswept Hills",
+			"Windswept Gravelly Hills",
+			"Windswept Forest",
+			"Stony Shore"
+		]
+	},
+	"snowy_beach": {
+		"color": "#64A278",
+		"biomes": [
+			"Snowy Beach"
+		]
+	},
+	"snowy_taiga-grove": {
+		"color": "#60A17B",
+		"biomes": [
+			"Snowy Plains",
+			"Ice Spikes",
+			"Snowy Taiga",
+			"Frozen Ocean",
+			"Frozen River",
+			"Grove",
+			"Snowy Slopes",
+			"Frozen Peaks",
+			"Jagged Peaks"
+		]
+	}
+}

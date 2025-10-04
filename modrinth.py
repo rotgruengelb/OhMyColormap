@@ -284,13 +284,13 @@ def update_data(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
                     ProjectUpdate(
                         title=project_data["name"],
                         description=project_data["summary"],
-                        categories=["gui", "themed", "tweaks"],
-                        additional_categories=["vanilla-like", "utility", "simplistic", "equipment", "16x"],
-                        issues_url="https://github.com/Pridecraft-Studios/pridetooltips/issues",
-                        source_url="https://github.com/Pridecraft-Studios/pridetooltips",
-                        discord_url="https://discord.pridecraft.gay/",
+                        categories=project_data["primary_categories"].split(" "),
+                        additional_categories=project_data["additional_categories"].split(" "),
+                        issues_url=project_data["issues_url"],
+                        source_url=project_data["source_url"],
+                        discord_url=project_data["discord_url"],
                         body=new_body,
-                        license_id="CC-BY-SA-4.0"
+                        license_id=project_data["license_id"],
                     )
                 )
                 logger.info(f"[{dir_name}] Metadata updated successfully.")
@@ -659,7 +659,7 @@ def main() -> None:
     modrinth_api = ModrinthAPI(
         token=modrinth_token,
         api_url=modrinth_api_url,
-        user_agent="Pridecraft-Studios/pridetooltips (daniel+pridetooltips@rotgruengelb.net)"
+        user_agent="rotgruengelb/ohmycolormap (daniel+ohmycolormap@rotgruengelb.net)"
     )
 
     match sys.argv[1] if len(sys.argv) > 1 else input("Enter subtask: "):

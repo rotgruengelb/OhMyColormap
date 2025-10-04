@@ -55,3 +55,19 @@ def generate_random_word(length: int) -> str:
         raise ValueError("Length must be a non-negative integer.")
 
     return ''.join(random_choice(ascii_lowercase) for _ in range(length))
+
+
+def friendly_pack_biome(name: str) -> str:
+    if not name:
+        return ""
+
+    s = name.replace("_", " ").replace("-", "/")
+
+    parts = s.split("/")
+    titled_parts = []
+    for part in parts:
+        tokens = part.split()
+        titled = " ".join(token.capitalize() for token in tokens)
+        titled_parts.append(titled)
+
+    return "/".join(titled_parts)
