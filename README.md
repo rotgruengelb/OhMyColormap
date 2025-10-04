@@ -1,22 +1,12 @@
-# Pride Tooltips
+# Oh My Colormap!
 
-A collection of resource packs that change tooltips to be colorful and/or pride themed.
+A collection of resource packs that change Minecraft’s colormaps.
 
-![Later Pride Tooltips Banner](./.github/assets/banner-opt.png)
+![Oh My Colormap! Banner](./.github/assets/banner.png)
 
 ## Who + Socials
 
-### Rotgruengelb (Pride Tooltips Dev):
+### Rotgruengelb (Developer & Artist):
 
 [![Watch me on Youtube](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/social/youtube-singular_46h.png)](https://youtube.com/rotgruengelb)
 [![See me on GitHub](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/social/github-singular_46h.png)](https://github.com/rotgruengelb)
-
-### Pridecraft:
-> We are Pridecraft Studios, a collective of developers making LGBT content for Minecraft.
-We make Resource Packs and mods to add LGBT themed stuff to the game, while trying to not "overgay". The main difference of our stuff compared to other LGBT Minecraft packs is that we know how to keep the game from looking like someone vomited rainbows all over the place.
-
-[![Join our Discord](https://raw.githubusercontent.com/intergrav/devins-badges/v3/assets/compact/social/discord-plural_46h.png)](https://discord.pridecraft.gay)
-[![Chat with us on Mastodon](https://raw.githubusercontent.com/intergrav/devins-badges/v3/assets/compact/social/mastodon-plural_46h.png)](https://tech.lgbt/@pridecraft)
-[![Watch us on Youtube](https://raw.githubusercontent.com/intergrav/devins-badges/v3/assets/compact/social/youtube-plural_46h.png)](https://youtube.com/@pridecraftstudios)
-[![Chat with us on Bluesky](https://badger-api-staging.worldwidepixel.ca/compact?gradientStart=00A5E4&gradientEnd=0076B1&lineOne=Chat%20with%20us%20on&lineTwo=Bluesky&colourOne=FFFFFF&colourTwo=FFFFFF&iconUrl=https://raw.githubusercontent.com/OzzyCzech/bluesky-icon/main/dist/bluesky-icon.white.png)](https://bsky.app/profile/pridecraft.gay)
-[![Check out our Instagram](https://badger-api-staging.worldwidepixel.ca/compact?gradientStart=BA5353&gradientEnd=61003D&lineOne=Check%20out%20our&lineTwo=Instagram&colourOne=FFFFFF&colourTwo=FFF&iconUrl=https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/instagram-white-icon.png)](https://instagram.com/pridecraftstudios)
