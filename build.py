@@ -20,6 +20,10 @@ def main():
     src = Path('src')
     build = Path('build')
     build_user = dotenv.get_key('.env', 'BUILD_USER') or "Unknown"
+    build_banner = bool(dotenv.get_key('.env', 'BUILD_BANNER')) or False
+
+    if build_banner:
+        (build / "banner").mkdir(parents=True, exist_ok=True)
 
     try:
 
@@ -41,6 +45,7 @@ def main():
         return
 
     district_pack_count = 0
+    build_banner_count = 0
     for colormap_name, biomes in colormaps.items():
         logger.info(f"Processing colormap '{colormap_name}'")
 
@@ -91,6 +96,11 @@ def main():
                 icon.save(build_zip_collect_path / "pack.png")
                 icon.save(build_out_path / f"{pack_name}.png")
                 banner.save(build_out_path / f"gallery_{pack_name}.png")
+                if build_banner and colormap_name == "grass":
+                    build_banner_count += 1
+                    build_banner_save_path = (build / "banner" / f"{build_banner_count}.png")
+                    banner.save(build_banner_save_path)
+                    logger.info("\t\tSaved banner image to " + str(build_banner_save_path))
 
                 # Compress
                 logger.debug(f"\t\tCompressing and finalizing {pack_name}")
@@ -113,7 +123,11 @@ def main():
 
             except Exception as e:
                 logger.error(f"\t\tError while processing {pack_name}: {e}", exc_info=True)
-
+    if build_banner:
+        file_list = ""
+        for i in range(0, build_banner_count):
+            file_list += f"{i}.png "
+        logger.info(file_list)
     logger.info(f"Total packs built: {district_pack_count}")
     logger.info(f"Done: build task completed in {int((datetime.now() - start_time).total_seconds() * 1000)}ms.")
 
